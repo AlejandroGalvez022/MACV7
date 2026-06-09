@@ -737,5 +737,138 @@ setTimeout(() => {
 }, 800);
 </script>
 <script src="lang.js"></script>
+<script>
+/* ══════════════════════════════════════
+   CARGA DE NOTICIAS DESDE CMS (Decap/GitHub)
+   ══════════════════════════════════════ */
+(async function loadCMSNoticias() {
+  const REPO = 'AlejandroGalvez022/MACV7';
+  const BRANCH = 'main';
+  const FOLDER = '_noticias';
+  const API = `https://api.github.com/repos/${REPO}/contents/${FOLDER}?ref=${BRANCH}`;
+
+  function parseFrontmatter(text) {
+    const match = text.match(/^---\n([\s\S]*?)\n---/);
+    if (!match) return {};
+    const fm = {};
+    match[1].split('\n').forEach(line => {
+      const idx = line.indexOf(':');
+      if (idx === -1) return;
+      const key = line.slice(0, idx).trim();
+      const val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+      fm[key] = val;
+    });
+    return fm;
+  }
+
+  function markdownToHtml(md) {
+    if (!md) return '';
+    return md
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^(?!<[h|u|l])(.+)/gm, '<p>$1</p>')
+      .replace(/<p><\/p>/g, '');
+  }
+
+  function tagClass(cat) {
+    const map = { coordinacion: 'tag-coordinacion', formacion: 'tag-formacion', red: 'tag-red', proyecto: 'tag-proyecto' };
+    return map[cat] || 'tag-proyecto';
+  }
+
+  function tagLabel(cat, lang) {
+    const map = {
+      es: { coordinacion: 'Coordinación', formacion: 'Formación', red: 'Red de Escuelas', proyecto: 'Proyecto' },
+      pt: { coordinacion: 'Coordenação', formacion: 'Formação', red: 'Rede de Escolas', proyecto: 'Projeto' }
+    };
+    return (map[lang] || map.es)[cat] || cat;
+  }
+
+  function ctaLabel(lang) {
+    return lang === 'pt' ? 'Ler notícia completa' : 'Leer noticia completa';
+  }
+
+  function buildCard(fm, lang, idx) {
+    const titulo = fm[`titulo_${lang}`] || fm.titulo_es || '';
+    const extracto = fm[`extracto_${lang}`] || fm.extracto_es || '';
+    const cuerpo = fm[`cuerpo_${lang}`] || fm.cuerpo_es || '';
+    const imagen = fm.imagen || 'fotonoticias.png';
+    const imgPos = fm.imagenPos || 'center center';
+    const cat = fm.categoria || 'proyecto';
+    const fecha = fm.fecha || '';
+    const destacada = fm.destacada === 'true';
+    const id = `cms_${idx}`;
+
+    // guardar en modalData
+    window.modalData = window.modalData || {};
+    window.modalData[id] = {
+      img: imagen,
+      imgPosition: imgPos,
+      tagClass: tagClass(cat),
+      es: { tag: tagLabel(cat, 'es'), date: fm.fecha || '', title: fm.titulo_es || '', body: `<p>${markdownToHtml(fm.cuerpo_es)}</p>` },
+      pt: { tag: tagLabel(cat, 'pt'), date: fm.fecha || '', title: fm.titulo_pt || '', body: `<p>${markdownToHtml(fm.cuerpo_pt)}</p>` }
+    };
+
+    return `
+    <article class="news-card ${destacada ? 'featured' : ''} reveal cms-card" data-tags="${cat}" data-id="${id}">
+      <div class="card-img">
+        <img src="${imagen}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;object-position:${imgPos};" alt="${titulo}"/>
+      </div>
+      <div class="card-body">
+        <span class="card-tag ${tagClass(cat)}">${tagLabel(cat, lang)}</span>
+        <p class="card-date">${fecha}</p>
+        <h2 class="card-title">${titulo}</h2>
+        <p class="card-excerpt">${extracto}</p>
+        <a href="#" class="card-cta" onclick="openModal('${id}'); return false;">
+          ${ctaLabel(lang)}
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>`;
+  }
+
+  try {
+    const res = await fetch(API);
+    if (!res.ok) return;
+    const files = await res.json();
+    const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== '.gitkeep');
+    if (!mdFiles.length) return;
+
+    const contents = await Promise.all(mdFiles.map(f => fetch(f.download_url).then(r => r.text())));
+    const noticias = contents.map(parseFrontmatter).filter(fm => fm.titulo_es);
+
+    // Ordenar por fecha descendente
+    noticias.sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
+
+    const grid = document.querySelector('.noticias-grid');
+    const lang = (typeof getLang === 'function' ? getLang() : localStorage.getItem('macidafe-lang')) || 'es';
+
+    noticias.forEach((fm, i) => {
+      const html = buildCard(fm, lang, i);
+      grid.insertAdjacentHTML('afterbegin', html);
+    });
+
+    // Reiniciar reveal y filtros para las nuevas cards
+    const nuevas = document.querySelectorAll('.cms-card');
+    nuevas.forEach(el => el.classList.add('visible'));
+
+    // Actualizar filtros
+    const filtroActivo = document.querySelector('.filtro-btn.active');
+    if (filtroActivo && filtroActivo.dataset.tag !== 'all') {
+      const tag = filtroActivo.dataset.tag;
+      nuevas.forEach(card => {
+        (card.dataset.tags.includes(tag)) ? card.classList.remove('hidden') : card.classList.add('hidden');
+      });
+    }
+
+  } catch(e) {
+    console.warn('No se pudieron cargar noticias del CMS:', e);
+  }
+})();
+</script>
 </body>
 </html>
