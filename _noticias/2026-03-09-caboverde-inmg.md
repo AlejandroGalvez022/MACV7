@@ -5,7 +5,7 @@ categoria: coordinacion
 fecha: 9 de marzo de 2026
 destacada: false
 titulo_es: MAC-IDAFE celebra en Cabo Verde su primera reunion de coordinacion
-  con el INMG español2
+  (prueba) con el INMG
 extracto_es: El proyecto celebro en Praia su primera reunion presencial de
   coordinacion con el INMG de Cabo Verde, un paso clave para reforzar la
   cooperacion entre territorios de la Macaronesia.
@@ -39,7 +39,7 @@ cuerpo_es: >
 
   - Desarrollo de materiales educativos adaptados al contexto caboverdiano.
 titulo_pt: MAC-IDAFE celebra em Cabo Verde a sua primeira reuniao de coordenacao
-  com o INMG portugués2
+  com o INMG
 extracto_pt: O projeto realizou na Praia a sua primeira reuniao presencial de
   coordenacao com o INMG de Cabo Verde, um passo fundamental para reforcar a
   cooperacao macaronesica.
