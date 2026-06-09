@@ -1,5 +1,5 @@
 ---
-imagen: foto_caboverde_inmg.png
+imagen: uploads/foto_caboverde_inmg.png
 imagenPos: center top
 categoria: coordinacion
 fecha: 9 de marzo de 2026

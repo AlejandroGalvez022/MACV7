@@ -1,5 +1,5 @@
 ---
-imagen: fotonoticias.png
+imagen: uploads/fotonoticias.png
 imagenPos: center center
 categoria: proyecto
 fecha: 17 de octubre de 2025

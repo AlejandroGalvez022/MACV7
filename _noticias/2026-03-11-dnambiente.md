@@ -1,5 +1,5 @@
 ---
-imagen: foto_dnambiente.png
+imagen: uploads/foto_dnambiente.png
 imagenPos: center center
 categoria: coordinacion
 fecha: 11 de marzo de 2026

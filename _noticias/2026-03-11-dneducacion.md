@@ -1,5 +1,5 @@
 ---
-imagen: foto_dneducacion.png
+imagen: uploads/foto_dneducacion.png
 imagenPos: center center
 categoria: coordinacion
 fecha: 11 de marzo de 2026
