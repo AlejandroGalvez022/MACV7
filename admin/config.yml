@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "uploads"
-public_folder: "/uploads"
+media_folder: ""
+public_folder: "/"
 
 locale: 'es'
 
@@ -38,7 +38,7 @@ collections:
         required: false
       - { label: "Título (ES)", name: "titulo_es", widget: "string" }
       - { label: "Extracto (ES)", name: "extracto_es", widget: "text", hint: "Resumen corto que aparece en la tarjeta" }
-      - { label: "Cuerpo completo (ES)", name: "cuerpo_es", widget: "markdown" }
+      - { label: "Cuerpo completo (ES)", name: "cuerpo_es", widget: "text" }
 
       - label: "── PORTUGUÊS ──"
         name: "sep_pt"
@@ -47,4 +47,4 @@ collections:
         required: false
       - { label: "Título (PT)", name: "titulo_pt", widget: "string" }
       - { label: "Extracto (PT)", name: "extracto_pt", widget: "text", hint: "Resumo curto que aparece no cartão" }
-      - { label: "Cuerpo completo (PT)", name: "cuerpo_pt", widget: "markdown" }
+      - { label: "Cuerpo completo (PT)", name: "cuerpo_pt", widget: "text" }
