@@ -232,6 +232,13 @@ setTimeout(() => {
 </script>
 <script src="lang.js"></script>
 <script>
+// Re-render CMS cards al cambiar idioma
+const _origSetLang = typeof setLang === "function" ? setLang : null;
+function setLang(lang) {
+  if (_origSetLang) _origSetLang(lang);
+  if (window._cmsRenderCards) window._cmsRenderCards(lang);
+}
+
 /* ══════════════════════════════════════
    CARGA DE NOTICIAS DESDE CMS (Decap/GitHub)
    ══════════════════════════════════════ */
@@ -245,13 +252,27 @@ setTimeout(() => {
     const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!match) return {};
     const fm = {};
-    match[1].split('\n').forEach(line => {
+    const lines = match[1].split('\n');
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
       const idx = line.indexOf(':');
-      if (idx === -1) return;
+      if (idx === -1) { i++; continue; }
       const key = line.slice(0, idx).trim();
-      const val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
-      fm[key] = val;
-    });
+      const rest = line.slice(idx + 1).trim();
+      if (rest === '|' || rest === '>') {
+        const blockLines = [];
+        i++;
+        while (i < lines.length && (lines[i].startsWith('  ') || lines[i] === '')) {
+          blockLines.push(lines[i].replace(/^  /, ''));
+          i++;
+        }
+        fm[key] = blockLines.join('\n').trim();
+      } else {
+        fm[key] = rest.replace(/^["']|["']$/g, '');
+        i++;
+      }
+    }
     return fm;
   }
 
@@ -327,18 +348,13 @@ setTimeout(() => {
 
     noticias.sort((a, b) => new Date(b.fm.fecha || 0) - new Date(a.fm.fecha || 0));
 
-    const lang = (typeof getLang === 'function' ? getLang() : localStorage.getItem('macidafe-lang')) || 'es';
-    const grid = document.querySelector('.noticias-grid');
+    // Guardar datos globalmente para re-render al cambiar idioma
+    window._cmsNoticias = noticias;
 
-    // Quitar loading
-    const loading = document.getElementById('cms-loading');
-    if (loading) loading.remove();
-
+    // Registrar en modalData
     noticias.forEach((n, i) => {
       const id = `cms_${i}`;
       const fm = n.fm;
-
-      // Registrar en modalData para que openModal funcione
       modalData[id] = {
         img: fm.imagen || 'fotonoticias.png',
         imgPosition: fm.imagenPos || 'center center',
@@ -356,18 +372,34 @@ setTimeout(() => {
           body: markdownToHtml(fm.cuerpo_pt || fm.cuerpo_es || '')
         }
       };
-
-      grid.insertAdjacentHTML('afterbegin', buildCard(fm, lang, id));
     });
 
-    // Actualizar filtros activos
-    const filtroActivo = document.querySelector('.filtro-btn.active');
-    if (filtroActivo && filtroActivo.dataset.tag !== 'all') {
-      const tag = filtroActivo.dataset.tag;
-      document.querySelectorAll('.cms-card').forEach(card => {
-        card.dataset.tags.includes(tag) ? card.classList.remove('hidden') : card.classList.add('hidden');
+    function renderCMSCards(lang) {
+      // Eliminar cards CMS anteriores
+      document.querySelectorAll('.cms-card').forEach(el => el.remove());
+      const grid = document.querySelector('.noticias-grid');
+      const filtroActivo = document.querySelector('.filtro-btn.active');
+      const tagActivo = filtroActivo ? filtroActivo.dataset.tag : 'all';
+
+      noticias.forEach((n, i) => {
+        const id = `cms_${i}`;
+        const html = buildCard(n.fm, lang, id);
+        grid.insertAdjacentHTML('afterbegin', html);
+        if (tagActivo !== 'all') {
+          const card = grid.querySelector(`[data-id="${id}"]`);
+          if (card && !card.dataset.tags.includes(tagActivo)) card.classList.add('hidden');
+        }
       });
     }
+
+    // Render inicial
+    const loading = document.getElementById('cms-loading');
+    if (loading) loading.remove();
+    const lang = (typeof getLang === 'function' ? getLang() : localStorage.getItem('macidafe-lang')) || 'es';
+    renderCMSCards(lang);
+
+    // Escuchar cambios de idioma
+    window._cmsRenderCards = renderCMSCards;
 
   } catch(e) {
     console.warn('CMS load error:', e);
