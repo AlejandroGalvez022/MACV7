@@ -1,0 +1,75 @@
+.paint-divider {
+    position: relative;
+    width: 100%;
+    height: 18px;
+
+    margin: 80px 0;
+
+    background: linear-gradient(
+        90deg,
+        #ff5a1f 0%,
+        #ff7a1a 25%,
+        #ff5a1f 50%,
+        #ff7a1a 75%,
+        #ff5a1f 100%
+    );
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.25),
+        inset 0 2px 4px rgba(255,255,255,.15);
+}
+
+
+/* textura irregular arriba */
+.paint-divider::before {
+    content: "";
+
+    position: absolute;
+
+    top: -4px;
+    left: 0;
+
+    width: 100%;
+    height: 10px;
+
+    background:
+        radial-gradient(circle at 10px 10px, transparent 8px, #000 9px),
+        radial-gradient(circle at 40px 8px, transparent 7px, #000 8px),
+        radial-gradient(circle at 70px 12px, transparent 9px, #000 10px),
+        radial-gradient(circle at 100px 6px, transparent 6px, #000 7px);
+
+    background-size: 120px 20px;
+
+    mix-blend-mode: overlay;
+
+    opacity: .25;
+}
+
+
+/* textura irregular abajo */
+.paint-divider::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -5px;
+    left: 0;
+
+    width: 100%;
+    height: 10px;
+
+    background:
+        radial-gradient(circle at 20px 0px, transparent 8px, #000 9px),
+        radial-gradient(circle at 60px 2px, transparent 7px, #000 8px),
+        radial-gradient(circle at 90px -2px, transparent 9px, #000 10px);
+
+    background-size: 120px 20px;
+
+    mix-blend-mode: overlay;
+
+    opacity: .25;
+}

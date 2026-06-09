@@ -1,0 +1,113 @@
+/* ═══════════════════════════════════════════════
+   transparencia.css
+   ═══════════════════════════════════════════════ */
+
+#datos { background: transparent; }
+.datos-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1740px; margin: 0 auto; }
+.dato-card { background: var(--white); border-radius: 20px; padding: 38px 22px; text-align: center; box-shadow: 0 8px 28px rgba(0,0,0,.05); border-top: 4px solid transparent; transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease; position: relative; overflow: hidden; }
+.dato-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(37,98,168,.03) 0%, transparent 60%); pointer-events: none; }
+.dato-card:hover { transform: translateY(-10px); box-shadow: 0 20px 44px rgba(27,63,110,.13); }
+.dato-card.blue   { border-top-color: var(--blue-mid); }
+.dato-card.teal   { border-top-color: var(--teal); }
+.dato-card.orange { border-top-color: var(--orange); }
+.dato-card.green  { border-top-color: var(--green-dark); }
+.dato-icon { width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.dato-card:hover .dato-icon { transform: scale(1.15) rotate(-6deg); }
+.dato-icon img { width: 32px; height: 32px; object-fit: contain; }
+.dato-val { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.75rem; line-height: 1.2; margin-bottom: 10px; }
+.dato-card.blue   .dato-val { color: var(--blue-mid); }
+.dato-card.teal   .dato-val { color: var(--teal); }
+.dato-card.orange .dato-val { color: var(--orange); }
+.dato-card.green  .dato-val { color: var(--green-dark); }
+.dato-label { font-size: .92rem; font-weight: 700; color: var(--text-mid); letter-spacing: .3px; }
+.dato-sub   { font-size: .85rem; color: var(--blue-dark); margin-top: 8px; line-height: 1.5; }
+
+/* ── ETAPA ACTUAL ── */
+#etapa-actual { background: var(--blue-dark); padding: 80px 8%; }
+.etapa-actual-wrap { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 44px; align-items: center; }
+.etapa-badge { background: rgba(255,255,255,.08); border: 2px solid rgba(242,163,60,.3); border-radius: 24px; padding: 38px 30px; text-align: center; backdrop-filter: blur(4px); }
+.etapa-badge-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 5.5rem; line-height: 1; color: var(--orange); }
+.etapa-badge-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--white); margin-top: 8px; letter-spacing: .5px; }
+.etapa-badge-sub { font-size: 1rem; color: rgba(255,255,255,.5); margin-top: 10px; font-weight: 500; }
+.etapa-actual-info h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--white); margin-bottom: 16px; }
+.etapa-actual-info p { font-size: 1.1rem; color: rgba(255,255,255,.78); line-height: 1.8; margin-bottom: 22px; }
+.etapa-fechas { display: flex; gap: 12px; flex-wrap: wrap; }
+.etapa-fecha-chip { background: rgba(255,255,255,.1); border-radius: 10px; padding: 12px 18px; display: flex; flex-direction: column; gap: 3px; }
+.chip-label { font-size: .78rem; color: rgba(255,255,255,.5); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.chip-val   { font-size: 1rem; color: var(--white); font-weight: 800; }
+
+.etapas-progress { max-width: 900px; margin: 52px auto 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; position: relative; }
+.etapas-progress::before { content: ''; position: absolute; top: 22px; left: calc(16.66% + 10px); right: calc(16.66% + 10px); height: 3px; background: rgba(255,255,255,.15); }
+.prog-item { display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 1; }
+.prog-dot { width: 44px; height: 44px; border-radius: 50%; border: 3px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1rem; color: rgba(255,255,255,.4); }
+.prog-item.active .prog-dot { background: var(--orange); border-color: var(--orange); color: white; box-shadow: 0 0 0 6px rgba(242,163,60,.25); animation: pulse 2.5s ease-in-out infinite; }
+.prog-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .8rem; text-align: center; letter-spacing: .5px; text-transform: uppercase; }
+.prog-item.active .prog-label { color: var(--white); }
+.prog-item:not(.active) .prog-label { color: rgba(255,255,255,.35); }
+.prog-dates { font-size: .85rem; color: rgba(255,255,255,.4); text-align: center; line-height: 1.5; }
+
+/* ── INDICADORES ── */
+#indicadores { background: linear-gradient(160deg, #fff8ee 0%, #e9eef2 100%); }
+.indicadores-intro { max-width: 680px; margin: -28px auto 52px; text-align: center; font-size: 1.08rem; color: var(--text-mid); line-height: 1.75; }
+.indicadores-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; max-width: 960px; margin: 0 auto; }
+.ind-card { background: var(--white); border-radius: 18px; padding: 30px 26px; box-shadow: 0 6px 20px rgba(0,0,0,.05); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease; }
+.ind-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(27,63,110,.1); }
+.ind-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+.ind-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .5px; text-transform: uppercase; color: var(--text-mid); }
+.ind-meta  { font-size: .82rem; color: var(--text-mid); opacity: .5; font-weight: 600; }
+.ind-vals  { display: flex; align-items: baseline; gap: 6px; margin-bottom: 16px; }
+.ind-current { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2.5rem; line-height: 1; color: var(--blue-mid); }
+.ind-sep   { font-size: 1.2rem; color: var(--text-mid); opacity: .35; }
+.ind-total { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text-mid); opacity: .5; }
+.ind-bar-wrap { background: #eef0f4; border-radius: 8px; height: 8px; overflow: hidden; }
+.ind-bar { height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--orange), var(--green-dark)); transition: width 1.2s cubic-bezier(0.25,1,0.5,1); width: 0%; }
+
+/* ── PROGRAMA ── */
+#programa { background: linear-gradient(135deg, #f0f7ff 0%, #e8f5ee 100%); }
+.programa-wrap { max-width: 1460px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.prog-card { background: var(--white); border-radius: 20px; padding: 36px 34px; box-shadow: 0 8px 24px rgba(0,0,0,.05); transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease; }
+.prog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 44px rgba(27,63,110,.1); }
+.prog-card-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.prog-card:hover .prog-card-icon { transform: scale(1.1) rotate(-6deg); }
+.prog-card-icon img { width: 32px; height: 32px; object-fit: contain; }
+.prog-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-mid); margin-bottom: 10px; }
+.prog-card p { font-size: 1.05rem; color: var(--text-dark); font-weight: 700; line-height: 1.5; }
+.prog-card .prog-sub { font-size: .9rem; color: var(--text-mid); font-weight: 400; margin-top: 8px; line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .datos-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .indicadores-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .programa-wrap { grid-template-columns: 1fr !important; gap: 16px; }
+}
+@media (max-width: 768px) {
+  .datos-grid { grid-template-columns: 1fr 1fr !important; gap: 12px; }
+  .dato-card { padding: 24px 14px; }
+  .dato-val { font-size: 1.35rem; }
+  .dato-label { font-size: .82rem; }
+  .dato-sub { font-size: .74rem; }
+  .dato-icon { width: 46px; height: 46px; }
+  #etapa-actual { padding: 56px 5%; }
+  .etapa-actual-wrap { grid-template-columns: 1fr !important; gap: 28px; }
+  .etapa-badge { padding: 26px 22px; }
+  .etapa-badge-num { font-size: 4rem; }
+  .etapa-badge-label { font-size: 1.2rem; }
+  .etapas-progress { grid-template-columns: 1fr !important; gap: 20px; margin-top: 40px; }
+  .etapas-progress::before { display: none; }
+  .prog-item { flex-direction: row; gap: 16px; align-items: center; }
+  .prog-label, .prog-dates { text-align: left; }
+  .indicadores-grid { grid-template-columns: 1fr 1fr !important; gap: 12px; }
+  .ind-card { padding: 20px 16px; }
+  .ind-current { font-size: 2rem; }
+  .indicadores-intro { font-size: .95rem; margin-bottom: 36px; }
+  .programa-wrap { grid-template-columns: 1fr !important; gap: 14px; }
+  .prog-card { padding: 26px 22px; }
+}
+@media (max-width: 480px) {
+  .datos-grid { grid-template-columns: 1fr 1fr !important; }
+  .indicadores-grid { grid-template-columns: 1fr !important; }
+  .etapa-fechas { flex-direction: column; gap: 8px; }
+}
+
+/* ══ TEXTO JUSTIFICADO ══ */
+p, li { text-align: justify; hyphens: none; -webkit-hyphens: none; }

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAC‑IDAFE | Actualidad</title>
+  <meta name="description" content="Últimas noticias y actividades del proyecto MAC-IDAFE. Seguimiento de reuniones, formaciones y avances en los territorios de la Macaronesia."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared2.css"/>
+  <link rel="stylesheet" href="actualidad.css"/>
+</head>
+<body class="page-actualidad">
+
+<header>
+  <a href="index.html" class="logo"><img src="macidafe_sinclaim.png" alt="Logo MAC-IDAFE"></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  <nav>
+    <a href="index.html" data-i18n="nav.inicio">INICIO</a>
+    <a href="conoce.html" data-i18n="nav.conoce">CONOCE EL PROYECTO</a>
+    <a href="actualidad.html" class="active" data-i18n="nav.actualidad">ACTUALIDAD</a>
+    <a href="transparencia.html" data-i18n="nav.transparencia">TRANSPARENCIA</a>
+    <a href="contacto.html" data-i18n="nav.contacto">CONTACTO</a>
+    <a href="acceso-privado.html" class="nav-acceso" data-i18n="nav.acceso">ACCESO PRIVADO</a>
+    <div class="lang-switcher">
+      <button class="lang-opt active" data-lang="es" onclick="setLang('es')"><span class="flag"><svg width="28" height="20" viewBox="0 0 28 20" style="border-radius:3px;display:block;"><rect width="28" height="20" fill="#c60b1e"/><rect y="5" width="28" height="10" fill="#f1bf00"/></svg></span><span class="code">ES</span></button>
+      <button class="lang-opt" data-lang="pt" onclick="setLang('pt')"><span class="flag"><svg width="28" height="20" viewBox="0 0 28 20" style="border-radius:3px;display:block;"><rect width="28" height="20" fill="#d62828"/><rect width="11" height="20" fill="#006600"/><circle cx="11" cy="10" r="4" fill="#f1bf00" stroke="#006600" stroke-width=".5"/><circle cx="11" cy="10" r="2.5" fill="#fff" stroke="#d62828" stroke-width=".5"/></svg></span><span class="code">PT</span></button>
+    </div>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <img class="page-hero-banner" src="portada-02.jpg" alt=""/>
+  <p class="page-hero-label" data-i18n="actual.hero.label">Noticias del proyecto</p>
+  <h1 data-i18n="actual.hero.h1">Actualidad</h1>
+  <p data-i18n="actual.hero.p">Seguimiento de las actividades, reuniones y avances de MAC‑IDAFE en todos los territorios</p>
+</div>
+
+<div class="filtros-bar">
+  <button class="filtro-btn active" data-tag="all" data-i18n="actual.filtro.all">Todas</button>
+  <button class="filtro-btn" data-tag="coordinacion" data-i18n="actual.filtro.coord">Coordinación</button>
+  <button class="filtro-btn" data-tag="formacion" data-i18n="actual.filtro.form">Formación</button>
+  <button class="filtro-btn" data-tag="red" data-i18n="actual.filtro.red">Red de Escuelas</button>
+  <button class="filtro-btn" data-tag="proyecto" data-i18n="actual.filtro.proy">Proyecto</button>
+</div>
+
+<section class="noticias-section">
+  <div class="noticias-grid">
+
+    <!-- ══ DESTACADA: Cabo Verde INMG ══ -->
+    <article class="news-card featured reveal" data-tags="coordinacion proyecto" data-id="caboverde">
+      <div class="card-img">
+        <img src="foto_caboverde_inmg.png" alt="Reunión de coordinación MAC-IDAFE en Cabo Verde" style="object-position:center top;"/>
+      </div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.n1.date">Praia, Cabo Verde · 9 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.n1.title">MAC‑IDAFE celebra en Cabo Verde su primera reunión de coordinación con el Instituto Nacional de Meteorologia e Geofísica</h2>
+        <p class="card-excerpt" data-i18n="actual.n1.excerpt">El proyecto de cooperación territorial MAC‑IDAFE celebró en la ciudad de Praia su primera reunión presencial de coordinación con el INMG de Cabo Verde, un paso clave para reforzar la cooperación entre territorios de la Macaronesia.</p>
+        <div class="card-resumen">
+          <p class="card-resumen-title" data-i18n="actual.n1.res.title">Puntos clave</p>
+          <ul>
+            <li data-i18n="actual.n1.res.li1">Primera reunión presencial entre Canarias y Cabo Verde</li>
+            <li data-i18n="actual.n1.res.li2">Puesta en común de la planificación de actividades</li>
+            <li data-i18n="actual.n1.res.li3">Presentación de materiales educativos desarrollados en Canarias</li>
+          </ul>
+        </div>
+        <a href="#" class="card-cta" onclick="openModal('caboverde'); return false;" data-i18n="actual.n1.cta">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N11: Dir. Nacional Ambiente + Ação Climática Agora ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="dnambiente">
+      <div class="card-img"><img src="foto_dnambiente.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.dnambiente.date">Praia, Cabo Verde · 11 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.dnambiente.title">MAC‑IDAFE visita la Dirección Nacional de Ambiente de Cabo Verde y el proyecto Ação Climática Agora</h2>
+        <p class="card-excerpt" data-i18n="actual.dnambiente.excerpt">El equipo del proyecto se reunió con la Dirección Nacional de Ambiente y con responsables del proyecto Ação Climática Agora, intercambiando experiencias en acción climática y explorando posibles sinergias.</p>
+        <a href="#" class="card-cta" onclick="openModal('dnambiente'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N10: ONU ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="onu">
+      <div class="card-img"><img src="foto_onu.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.onu.date">Praia, Cabo Verde · 11 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.onu.title">MAC‑IDAFE se reúne con la Oficina del Coordinador Residente de Naciones Unidas en Cabo Verde</h2>
+        <p class="card-excerpt" data-i18n="actual.onu.excerpt">El equipo del proyecto mantuvo un encuentro institucional con la Oficina del Coordinador Residente de las Naciones Unidas en Cabo Verde para presentar el proyecto y explorar posibles espacios de colaboración.</p>
+        <a href="#" class="card-cta" onclick="openModal('onu'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N9: Dir. Nacional Educación ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="dneducacion">
+      <div class="card-img"><img src="foto_dneducacion.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.dneducacion.date">Praia, Cabo Verde · 11 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.dneducacion.title">MAC‑IDAFE mantiene un encuentro institucional con la Dirección Nacional de Educación de Cabo Verde</h2>
+        <p class="card-excerpt" data-i18n="actual.dneducacion.excerpt">El equipo de Gesplan y el INMG se reunieron con el Director Nacional de Educación de Cabo Verde para presentar el proyecto y explorar vías de colaboración con la administración educativa nacional.</p>
+        <a href="#" class="card-cta" onclick="openModal('dneducacion'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N8: Visita centros educativos Praia ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="centros">
+      <div class="card-img"><img src="foto_centros1.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;object-position:center 65%;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.centros.date">Praia, Cabo Verde · 10 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.centros.title">Visitamos centros educativos de Praia para conocer el contexto educativo de Cabo Verde</h2>
+        <p class="card-excerpt" data-i18n="actual.centros.excerpt">El equipo realizó visitas a varios centros de enseñanza de la ciudad de Praia, acompañados por personal del INMG y de la Dirección Nacional de Educación de Cabo Verde, para presentar el proyecto y conocer el sistema educativo local.</p>
+        <a href="#" class="card-cta" onclick="openModal('centros'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N7: Delegación UE ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="ue">
+      <div class="card-img"><img src="foto_ue.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;object-position:center 25%;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.ue.date">Praia, Cabo Verde · 10 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.ue.title">MAC‑IDAFE mantiene un encuentro institucional con la Delegación de la Unión Europea en Cabo Verde</h2>
+        <p class="card-excerpt" data-i18n="actual.ue.excerpt">El equipo de Gesplan, acompañado por el representante de FUCAEX, presentó el proyecto MAC‑IDAFE a la Delegación de la UE en Cabo Verde e intercambió perspectivas sobre el papel de la educación en la respuesta al cambio climático.</p>
+        <a href="#" class="card-cta" onclick="openModal('ue'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N6: FUCAEX ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="fucaex">
+      <div class="card-img"><img src="foto_fucaex.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.fucaex.date">Praia, Cabo Verde · 9 de marzo de 2026</p>
+        <h2 class="card-title" data-i18n="actual.fucaex.title">MAC‑IDAFE mantiene en Cabo Verde una reunión de coordinación con la Fundación Canaria para la Acción Exterior</h2>
+        <p class="card-excerpt" data-i18n="actual.fucaex.excerpt">El equipo de Gesplan se reunió con la delegación de FUCAEX en Praia para presentar el proyecto, establecer vías de colaboración y reforzar la red institucional de MAC‑IDAFE en Cabo Verde.</p>
+        <a href="#" class="card-cta" onclick="openModal('fucaex'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N4 PDF: Azores ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="azores">
+      <div class="card-img"><img src="foto_azores.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.azores.date">Horta, Azores · 10 de febrero de 2026</p>
+        <h2 class="card-title" data-i18n="actual.azores.title">MAC‑IDAFE celebra en Azores su primera reunión de coordinación con la Secretaría Regional de Medioambiente y Acción Climática</h2>
+        <p class="card-excerpt" data-i18n="actual.azores.excerpt">El equipo del proyecto se reunió en Horta con la Secretaria Regional de Medioambiente y Acción Climática del Gobierno de Azores, avanzando en la planificación de actividades y la implementación del proyecto en el archipiélago.</p>
+        <a href="#" class="card-cta" onclick="openModal('azores'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N3 PDF: Madeira ══ -->
+    <article class="news-card reveal" data-tags="coordinacion" data-id="madeira">
+      <div class="card-img"><img src="foto_madeira.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-coordinacion" data-i18n="actual.filtro.coord">Coordinación</span>
+        <p class="card-date" data-i18n="actual.madeira.date">Funchal, Madeira · 27 de enero de 2026</p>
+        <h2 class="card-title" data-i18n="actual.madeira.title">MAC‑IDAFE celebra en Madeira su primera reunión de coordinación con la Dirección Regional de Medioambiente y Mar</h2>
+        <p class="card-excerpt" data-i18n="actual.madeira.excerpt">El equipo del proyecto se reunió en Funchal con la DRAM del Gobierno de Madeira, marcando un paso importante para la implementación del proyecto en el archipiélago y el refuerzo de la cooperación macaronésica.</p>
+        <a href="#" class="card-cta" onclick="openModal('madeira'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N2 PDF: Inicio Etapa 1 ══ -->
+    <article class="news-card reveal" data-tags="proyecto" data-id="etapa1">
+      <div class="card-img"><img src="fotonoticias.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-proyecto" data-i18n="actual.filtro.proy">Proyecto</span>
+        <p class="card-date" data-i18n="actual.etapa1.date">1 de noviembre de 2025</p>
+        <h2 class="card-title" data-i18n="actual.etapa1.title">Iniciamos la primera etapa de MAC‑IDAFE: COMPRENDER</h2>
+        <p class="card-excerpt" data-i18n="actual.etapa1.excerpt">El proyecto arranca la Etapa 1, centrada en el diagnóstico de necesidades educativas y ambientales en cada uno de los cuatro territorios, sentando las bases metodológicas para las fases siguientes.</p>
+        <a href="#" class="card-cta" onclick="openModal('etapa1'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ N1 PDF: Bienvenida ══ -->
+    <article class="news-card reveal" data-tags="proyecto" data-id="bienvenida">
+      <div class="card-img"><img src="fotonoticias.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;"/></div>
+      <div class="card-body">
+        <span class="card-tag tag-proyecto" data-i18n="actual.filtro.proy">Proyecto</span>
+        <p class="card-date" data-i18n="actual.bienvenida.date">17 de octubre de 2025</p>
+        <h2 class="card-title" data-i18n="actual.bienvenida.title">Te damos la bienvenida a MAC‑IDAFE: la Red de Escuelas por la Acción Climática de la Macaronesia</h2>
+        <p class="card-excerpt" data-i18n="actual.bienvenida.excerpt">El proyecto MAC‑IDAFE, cofinanciado por el Programa INTERREG MAC 2021–2027, conecta centros educativos de Canarias, Madeira, Azores y Cabo Verde para trabajar conjuntamente en educación y adaptación frente al cambio climático.</p>
+        <a href="#" class="card-cta" onclick="openModal('bienvenida'); return false;" data-i18n="actual.cta.leer">
+          Leer noticia completa
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-img" id="modal-img" style="position:relative;">
+      <img src="" alt="" id="modal-hero-img"/>
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<section id="socios" style="padding-bottom:60px;">
+  <h2 class="section-title reveal" data-i18n="index.socios.title">Socios del Proyecto</h2>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:48px;padding:40px 24px 0;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+      <p class="socio-label" data-i18n="socios.principal">SOCIO PRINCIPAL:</p>
+      <img src="gobcan.png" alt="Gobierno de Canarias" style="height:80px;"/>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+      <p class="socio-label" data-i18n="socios.feder">SOCIOS FEDER:</p>
+      <img src="ristra_feder.png" alt="Socios FEDER" style="max-height:70px;max-width:700px;width:100%;object-fit:contain;"/>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+      <p class="socio-label" data-i18n="socios.africano">SOCIO DE TERCER PAÍS AFRICANO:</p>
+      <img src="inmg.png" alt="INMG" style="height:80px;"/>
+    </div>
+  </div>
+</section>
+
+<div class="socios-section">
+  <div class="socios-grid" style="flex-direction:row;align-items:stretch;">
+    <div class="socio-col" style="flex:1;">
+      <div class="socio-col-box" style="min-height:130px;padding:28px 32px;"><img src="gobcan.png" alt="Gobierno de Canarias" style="height:80px;"/></div>
+    </div>
+    <div class="socio-col" style="flex:2;">
+      <div class="socio-col-box" style="min-height:130px;padding:28px 32px;"><img src="ristra_feder.png" alt="Socios FEDER" style="width:100%;height:auto;max-height:100px;object-fit:contain;"/></div>
+    </div>
+    <div class="socio-col" style="flex:1;">
+      <div class="socio-col-box" style="min-height:130px;padding:28px 32px;"><img src="inmg.png" alt="INMG" style="height:80px;"/></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span data-i18n="footer">© 2026 MAC‑IDAFE · Proyecto cofinanciado por el Programa INTERREG MAC 2021–2027</span>
+    <div class="footer-right">
+      <a href="mailto:macidafe2cap@gesplan.es" class="footer-email">macidafe2cap@gesplan.es</a>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/mac_idafe/" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/MAC-IDAFE/61565117734084/" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   DATOS DE MODALES
+   ══════════════════════════════════════ */
+const modalData = {
+
+  caboverde: {
+    img: 'foto_caboverde_inmg.png',
+    imgPosition: 'center top',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 9 de marzo de 2026',
+      title: 'MAC‑IDAFE celebra en Cabo Verde su primera reunión de coordinación con el Instituto Nacional de Meteorologia e Geofísica',
+      body: `<p>El proyecto de cooperación territorial MAC‑IDAFE celebró en la ciudad de Praia su primera reunión presencial de coordinación con el Instituto Nacional de Meteorologia e Geofísica (INMG) de Cabo Verde. Este encuentro supone un paso clave para avanzar en la implementación del proyecto en el país y reforzar la cooperación entre territorios de la Macaronesia.</p>
+<p>La jornada contó con la participación del equipo técnico del INMG y de Gestión y Planeamiento Territorial y Medioambiental S.A. (Gesplan), entidad pública del Gobierno de Canarias, responsable de la ejecución del proyecto desde el archipiélago canario.</p>
+<h3>Resumen de la jornada</h3>
+<ul>
+<li>Primera reunión presencial de coordinación entre Canarias y Cabo Verde en el marco de MAC‑IDAFE.</li>
+<li>Puesta en común de la planificación de actividades del proyecto en el territorio caboverdiano.</li>
+<li>Presentación de los materiales educativos desarrollados en Canarias en el marco del proyecto IDAFE.</li>
+</ul>
+<h3>Actividades previstas en Cabo Verde</h3>
+<ul>
+<li>Análisis del sistema educativo caboverdiano y del contexto social y educativo en relación con el cambio climático.</li>
+<li>Realización de talleres participativos con docentes y personas expertas del territorio.</li>
+<li>Formación presencial y online dirigida al profesorado.</li>
+<li>Desarrollo de materiales educativos sobre cambio climático adaptados al contexto caboverdiano.</li>
+</ul>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 9 de março de 2026',
+      title: 'MAC‑IDAFE celebra em Cabo Verde a sua primeira reunião de coordenação com o Instituto Nacional de Meteorologia e Geofísica',
+      body: `<p>O projeto de cooperação territorial MAC‑IDAFE realizou na cidade da Praia a sua primeira reunião presencial de coordenação com o Instituto Nacional de Meteorologia e Geofísica (INMG) de Cabo Verde.</p>
+<h3>Resumo da jornada</h3>
+<ul>
+<li>Primeira reunião presencial de coordenação entre as Canárias e Cabo Verde no âmbito do MAC‑IDAFE.</li>
+<li>Partilha do planeamento das atividades do projeto no território cabo-verdiano.</li>
+<li>Apresentação dos materiais educativos desenvolvidos nas Canárias no âmbito do projeto IDAFE.</li>
+</ul>
+<h3>Atividades previstas em Cabo Verde</h3>
+<ul>
+<li>Análise do sistema educativo cabo-verdiano e do contexto social e educativo em relação às alterações climáticas.</li>
+<li>Realização de workshops participativos com docentes e especialistas.</li>
+<li>Formação presencial e online dirigida a professores.</li>
+<li>Desenvolvimento de materiais educativos adaptados ao contexto cabo-verdiano.</li>
+</ul>`
+    }
+  },
+
+  dnambiente: {
+    img: 'foto_dnambiente.png',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 11 de marzo de 2026',
+      title: 'MAC‑IDAFE visita la Dirección Nacional de Ambiente de Cabo Verde y el proyecto Ação Climática Agora',
+      body: `<p>Desde el proyecto nos reunimos con la Dirección Nacional de Ambiente de Cabo Verde, en un encuentro en el que también participaron responsables del proyecto Ação Climática Agora, una iniciativa orientada a fortalecer la acción climática en el país.</p>
+<p>La reunión contó también con la participación de Denise da Pina, Administradora Executiva do Conselho de Administração del Instituto Nacional de Meteorologia e Geofísica (INMG).</p>
+<h3>Intercambio de experiencias en acción climática</h3>
+<p>La reunión permitió intercambiar experiencias y conocer iniciativas que actualmente se están desarrollando en Cabo Verde en el ámbito de la acción climática, así como explorar posibles espacios de colaboración.</p>
+<p>Este tipo de encuentros contribuyen a fortalecer la coordinación entre proyectos y entidades que trabajan en el ámbito del cambio climático, favoreciendo el intercambio de conocimiento y la generación de sinergias.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 11 de março de 2026',
+      title: 'MAC‑IDAFE visita a Direção Nacional do Ambiente de Cabo Verde e o projeto Ação Climática Agora',
+      body: `<p>O projeto reuniu-se com a Direção Nacional do Ambiente de Cabo Verde, num encontro em que também participaram responsáveis do projeto Ação Climática Agora. A reunião permitiu trocar experiências e explorar possíveis espaços de colaboração no âmbito da ação climática.</p>`
+    }
+  },
+
+  onu: {
+    img: 'foto_onu.png',
+    imgPosition: 'center 40%',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 11 de marzo de 2026',
+      title: 'MAC‑IDAFE se reúne con la Oficina del Coordinador Residente de Naciones Unidas en Cabo Verde',
+      body: `<p>El equipo del proyecto tuvo la oportunidad de asistir a un encuentro institucional con la Oficina del Coordinador Residente de las Naciones Unidas (RCO) en Cabo Verde, con el objetivo de presentar el proyecto y explorar posibles espacios de colaboración.</p>
+<p>La reunión contó con el acompañamiento de Jorge Cólogan y González-Massieu, representante en Cabo Verde de la Fundación Canaria para la Acción Exterior (FUCAEX), quien facilitó la coordinación de esta visita.</p>
+<p>La reunión permitió intercambiar perspectivas sobre el papel de la educación en la respuesta frente al cambio climático y explorar posibles sinergias con iniciativas impulsadas por el sistema de Naciones Unidas en Cabo Verde.</p>
+<p>Este tipo de encuentros contribuyen a fortalecer la coordinación entre actores internacionales y proyectos de cooperación territorial que trabajan en ámbitos relacionados con la adaptación climática y el desarrollo sostenible.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 11 de março de 2026',
+      title: 'MAC‑IDAFE reúne-se com o Escritório do Coordenador Residente das Nações Unidas em Cabo Verde',
+      body: `<p>A equipa do projeto participou num encontro institucional com o Escritório do Coordenador Residente das Nações Unidas (RCO) em Cabo Verde para apresentar o projeto e explorar possíveis espaços de colaboração no âmbito da educação climática.</p>`
+    }
+  },
+
+  dneducacion: {
+    img: 'foto_dneducacion.png',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 11 de marzo de 2026',
+      title: 'MAC‑IDAFE mantiene un encuentro institucional con la Dirección Nacional de Educación de Cabo Verde',
+      body: `<p>En el marco de la agenda de trabajo del proyecto en Cabo Verde se mantuvo una reunión institucional con el Director Nacional de Educación de Cabo Verde. El encuentro contó con la participación del equipo de Gesplan y de Denise da Pina, Administradora Executiva do Conselho de Administração del INMG.</p>
+<h3>Presentación del proyecto MAC‑IDAFE</h3>
+<p>Durante la reunión se presentó el enfoque general del proyecto, sus objetivos y las principales líneas de trabajo previstas para su implementación en Cabo Verde. El proyecto promueve la educación frente al cambio climático mediante el desarrollo de materiales educativos, la formación del profesorado y el impulso de iniciativas educativas que permitan fortalecer la alfabetización climática del alumnado.</p>
+<h3>Coordinación con el sistema educativo caboverdiano</h3>
+<p>El encuentro permitió intercambiar impresiones sobre el contexto educativo del país y explorar posibles vías de colaboración con la administración educativa nacional para facilitar la implementación de las acciones previstas en el marco del proyecto.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 11 de março de 2026',
+      title: 'MAC‑IDAFE mantém um encontro institucional com a Direção Nacional de Educação de Cabo Verde',
+      body: `<p>No âmbito da agenda de trabalho do projeto em Cabo Verde realizou-se uma reunião institucional com o Diretor Nacional de Educação de Cabo Verde. O encontro permitiu trocar impressões sobre o contexto educativo do país e explorar possíveis vias de colaboração com a administração educativa nacional.</p>`
+    }
+  },
+
+  centros: {
+    img: 'foto_centros1.png',
+    imgPosition: 'center 65%',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 10 de marzo de 2026',
+      title: 'Visitamos centros educativos de Praia para conocer el contexto educativo de Cabo Verde',
+      body: `<p>En el marco de la agenda de trabajo del proyecto se realizó una visita a varios centros educativos de la ciudad de Praia con el objetivo de presentar el proyecto a la comunidad y conocer de primera mano el funcionamiento del sistema educativo en el territorio.</p>
+<p>La actividad contó con la presencia del equipo de Gesplan con el acompañamiento de Denise da Pina, Administradora Executiva do Conselho de Administração del INMG, así como con la participación de personal de la Dirección Nacional de Educación de Cabo Verde.</p>
+<h3>Presentación del proyecto MAC‑IDAFE en centros educativos</h3>
+<p>Durante las visitas se compartió con la comunidad educativa el enfoque y los principales objetivos del proyecto: promover la educación frente al cambio climático mediante el desarrollo de materiales pedagógicos, la formación del profesorado y la implementación de acciones educativas vinculadas a los retos climáticos del territorio.</p>
+<h3>Centros visitados</h3>
+<ul>
+<li>Escuela Básica Quintino Lopes Ribeiro</li>
+<li>Escuela Secundaria Manuel Lopes</li>
+<li>Escuela Básica António Nunes</li>
+</ul>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 10 de março de 2026',
+      title: 'Visitamos estabelecimentos de ensino da Praia para conhecer o contexto educativo de Cabo Verde',
+      body: `<p>Realizou-se uma visita a vários estabelecimentos de ensino da cidade da Praia para apresentar o projeto à comunidade educativa e conhecer o funcionamento do sistema educativo no território.</p>
+<h3>Estabelecimentos visitados</h3>
+<ul>
+<li>Escola Básica Quintino Lopes Ribeiro</li>
+<li>Escola Secundária Manuel Lopes</li>
+<li>Escola Básica António Nunes</li>
+</ul>`
+    }
+  },
+
+  ue: {
+    img: 'foto_ue.png',
+    imgPosition: 'center 25%',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 10 de marzo de 2026',
+      title: 'MAC‑IDAFE mantiene un encuentro institucional con la Delegación de la Unión Europea en Cabo Verde',
+      body: `<p>Continuando con la agenda institucional en Cabo Verde, el equipo de Gesplan mantuvo un encuentro de trabajo con la Delegación de la Unión Europea en Cabo Verde. En la reunión participó también Jorge Cólogan y González-Massieu, representante de FUCAEX en Cabo Verde, quien acompañó al equipo durante el encuentro.</p>
+<h3>Presentación del proyecto MAC‑IDAFE</h3>
+<p>Durante el encuentro se presentó a la Delegación de la UE el esquema general del proyecto, sus objetivos y las acciones previstas para su implementación en Cabo Verde. El proyecto promueve la educación frente al cambio climático mediante el desarrollo de materiales educativos y la formación del profesorado.</p>
+<h3>Cooperación europea y acción climática</h3>
+<p>El encuentro puso de relieve la importancia de la cooperación europea en el impulso de iniciativas orientadas a la adaptación climática y al fortalecimiento de capacidades en territorios especialmente vulnerables a los impactos del cambio climático.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 10 de março de 2026',
+      title: 'MAC‑IDAFE mantém um encontro institucional com a Delegação da União Europeia em Cabo Verde',
+      body: `<p>A equipa da Gesplan manteve um encontro de trabalho com a Delegação da União Europeia em Cabo Verde, acompanhada pelo representante da FUCAEX. Durante o encontro foi apresentado o esquema geral do projeto, os seus objetivos e as ações previstas para a implementação em Cabo Verde.</p>`
+    }
+  },
+
+  fucaex: {
+    img: 'foto_fucaex.png',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Praia, Cabo Verde · 9 de marzo de 2026',
+      title: 'MAC‑IDAFE mantiene en Cabo Verde una reunión de coordinación con la Fundación Canaria para la Acción Exterior',
+      body: `<p>En el marco de la agenda institucional del proyecto en Cabo Verde, el equipo de Gesplan mantuvo un encuentro de trabajo con la Fundación Canaria para la Acción Exterior (FUCAEX) en su delegación en Praia.</p>
+<p>La reunión se celebró con Jorge Cólogan y González-Massieu, delegado de FUCAEX en Cabo Verde, entidad que actúa como representación institucional del Gobierno de Canarias en el país y que presta apoyo a instituciones y proyectos de cooperación desarrollados en el territorio.</p>
+<h3>Presentación del proyecto MAC‑IDAFE</h3>
+<p>Durante el encuentro se presentó al delegado de FUCAEX el esquema general del proyecto, sus objetivos y las principales líneas de trabajo previstas en Cabo Verde.</p>
+<h3>Apoyo institucional y conexión con actores locales</h3>
+<p>El delegado de FUCAEX facilitó el contacto con diferentes agentes e iniciativas relevantes en el país, con el objetivo de fortalecer la red de colaboración del proyecto y facilitar su implantación en el contexto local.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Praia, Cabo Verde · 9 de março de 2026',
+      title: 'MAC‑IDAFE mantém em Cabo Verde uma reunião de coordenação com a Fundação Canária para a Ação Exterior',
+      body: `<p>A equipa da Gesplan manteve um encontro de trabalho com a Fundação Canária para a Ação Exterior (FUCAEX) na sua delegação na Praia, com o objetivo de apresentar o projeto e estabelecer vias de colaboração institucional.</p>`
+    }
+  },
+
+  azores: {
+    img: 'foto_azores.png',
+    imgPosition: 'center top',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Horta, Azores · 10 de febrero de 2026',
+      title: 'MAC‑IDAFE celebra en Azores su primera reunión de coordinación con la Secretaría Regional de Medioambiente y Acción Climática',
+      body: `<p>El equipo del proyecto celebró en la ciudad de Horta su primera reunión presencial de coordinación con la Secretaria Regional de Medioambiente y Acción Climática del Gobierno de Azores. Este encuentro supone un paso clave para avanzar en la implementación del proyecto en el archipiélago y reforzar la cooperación entre territorios de la Macaronesia.</p>
+<p>La jornada contó con la participación del equipo técnico de la Secretaria Regional y de Gesplan, entidad pública del Gobierno de Canarias, responsable de la ejecución del proyecto.</p>
+<h3>Resumen de la jornada</h3>
+<ul>
+<li>Primera reunión presencial de coordinación entre Canarias y Azores en el marco de MAC‑IDAFE.</li>
+<li>Puesta en común de la planificación de actividades del proyecto en el territorio.</li>
+<li>Presentación de los materiales educativos desarrollados en Canarias y de los recursos divulgativos del gobierno local.</li>
+</ul>
+<h3>Actividades previstas en Azores</h3>
+<ul>
+<li>Análisis del sistema educativo y del contexto social y educativo en relación con el cambio climático.</li>
+<li>Realización de talleres participativos con docentes y personas expertas del territorio.</li>
+<li>Formación presencial y online dirigida al profesorado.</li>
+<li>Desarrollo de materiales educativos sobre cambio climático adaptados al contexto de Azores.</li>
+</ul>
+<p>Agradecemos a los socios de Azores por el recibimiento y la predisposición mostrada durante la visita.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Horta, Açores · 10 de fevereiro de 2026',
+      title: 'MAC‑IDAFE celebra nos Açores a sua primeira reunião de coordenação com a Secretaria Regional do Ambiente e Ação Climática',
+      body: `<p>A equipa do projeto realizou na cidade da Horta a sua primeira reunião presencial de coordenação com a Secretaria Regional do Ambiente e Ação Climática do Governo dos Açores.</p>
+<h3>Resumo da jornada</h3>
+<ul>
+<li>Primeira reunião presencial de coordenação entre as Canárias e os Açores no âmbito do MAC‑IDAFE.</li>
+<li>Partilha do planeamento das atividades do projeto no território.</li>
+<li>Apresentação dos materiais educativos desenvolvidos nas Canárias.</li>
+</ul>
+<h3>Atividades previstas nos Açores</h3>
+<ul>
+<li>Análise do sistema educativo e do contexto social e educativo em relação às alterações climáticas.</li>
+<li>Realização de workshops participativos com docentes e especialistas.</li>
+<li>Formação presencial e online dirigida a professores.</li>
+<li>Desenvolvimento de materiais educativos adaptados ao contexto dos Açores.</li>
+</ul>`
+    }
+  },
+
+  madeira: {
+    img: 'foto_madeira.png',
+    tagClass: 'tag-coordinacion',
+    es: {
+      tag: 'Coordinación',
+      date: 'Funchal, Madeira · 27 de enero de 2026',
+      title: 'MAC‑IDAFE celebra en Madeira su primera reunión de coordinación con la Dirección Regional de Medioambiente y Mar',
+      body: `<p>El equipo del proyecto celebró en la ciudad de Funchal su primera reunión presencial de coordinación con la Dirección Regional de Medioambiente y Mar (DRAM) del Gobierno de Madeira. Este encuentro supone un paso importante para la implementación del proyecto en el archipiélago y el refuerzo de la cooperación entre territorios de la Macaronesia.</p>
+<p>La jornada contó con la participación del equipo técnico del DRAM y el equipo de Gesplan.</p>
+<h3>Resumen de la jornada</h3>
+<ul>
+<li>Primera reunión presencial de coordinación entre Canarias y Madeira en el marco de MAC‑IDAFE.</li>
+<li>Puesta en común de la planificación de actividades del proyecto en el territorio.</li>
+<li>Presentación de los materiales educativos desarrollados en Canarias y de los recursos divulgativos del DRAM.</li>
+</ul>
+<h3>Actividades previstas en Madeira</h3>
+<ul>
+<li>Análisis del sistema educativo de Madeira y del contexto social y educativo en relación con el cambio climático.</li>
+<li>Realización de talleres participativos con docentes y personas expertas del territorio.</li>
+<li>Formación presencial y online dirigida al profesorado.</li>
+<li>Desarrollo de materiales educativos sobre cambio climático adaptados al contexto educativo madeirense.</li>
+</ul>
+<p>De este encuentro cabe destacar el gran trabajo en materia de sostenibilidad que ya se realiza en la región con los centros educativos.</p>`
+    },
+    pt: {
+      tag: 'Coordenação',
+      date: 'Funchal, Madeira · 27 de janeiro de 2026',
+      title: 'MAC‑IDAFE celebra na Madeira a sua primeira reunião de coordenação com a Direção Regional do Ambiente e do Mar',
+      body: `<p>A equipa do projeto realizou na cidade do Funchal a sua primeira reunião presencial de coordenação com a Direção Regional do Ambiente e do Mar (DRAM) do Governo da Madeira.</p>
+<h3>Resumo da jornada</h3>
+<ul>
+<li>Primeira reunião presencial de coordenação entre as Canárias e a Madeira no âmbito do MAC‑IDAFE.</li>
+<li>Partilha do planeamento das atividades do projeto no território.</li>
+<li>Apresentação dos materiais educativos desenvolvidos nas Canárias e dos recursos da DRAM.</li>
+</ul>
+<h3>Atividades previstas na Madeira</h3>
+<ul>
+<li>Análise do sistema educativo da Madeira e do contexto social e educativo em relação às alterações climáticas.</li>
+<li>Realização de workshops participativos com docentes e especialistas.</li>
+<li>Formação presencial e online dirigida a professores.</li>
+<li>Desenvolvimento de materiais educativos adaptados ao contexto educativo madeirense.</li>
+</ul>`
+    }
+  },
+
+  etapa1: {
+    img: 'fotonoticias.png',
+    tagClass: 'tag-proyecto',
+    es: {
+      tag: 'Proyecto',
+      date: '1 de noviembre de 2025',
+      title: 'Iniciamos la primera etapa de MAC‑IDAFE: COMPRENDER',
+      body: `<p>El proyecto MAC‑IDAFE se desarrolla en tres etapas diferenciadas que estructuran el proceso de trabajo en los cuatro territorios de la Macaronesia.</p>
+<ul>
+<li><strong>Etapa 1. Comprender:</strong> diagnóstico de necesidades educativas y ambientales en cada región.</li>
+<li><strong>Etapa 2. Adaptar:</strong> contextualización y elaboración de materiales y planes formativos.</li>
+<li><strong>Etapa 3. Reutilizar:</strong> implementación en las aulas, formación de docentes y creación de la red de escuelas.</li>
+</ul>
+<p>Esta primera etapa constituye el punto de partida fundamental del proyecto. Durante estos primeros meses, el equipo dedicará sus esfuerzos a comprender las particularidades de los centros educativos de Canarias, Madeira, Azores y Cabo Verde, reconociendo que cada archipiélago tiene contextos específicos que requieren enfoques diferenciados.</p>
+<p>El objetivo principal de esta etapa es implicar a los principales agentes de interés en la identificación y análisis de los efectos del cambio climático en sus entornos, especialmente los episodios de fenómenos climatológicos adversos y su impacto en el bienestar del alumnado.</p>`
+    },
+    pt: {
+      tag: 'Projeto',
+      date: '1 de novembro de 2025',
+      title: 'Iniciamos a primeira etapa do MAC‑IDAFE: COMPREENDER',
+      body: `<p>O projeto MAC‑IDAFE desenvolve-se em três etapas diferenciadas nos quatro territórios da Macaronésia.</p>
+<ul>
+<li><strong>Etapa 1. Compreender:</strong> diagnóstico das necessidades educativas e ambientais em cada região.</li>
+<li><strong>Etapa 2. Adaptar:</strong> contextualização e elaboração de materiais e planos formativos.</li>
+<li><strong>Etapa 3. Reutilizar:</strong> implementação nas salas de aula, formação de docentes e criação da rede de escolas.</li>
+</ul>
+<p>Esta primeira etapa constitui o ponto de partida do projeto, centrando-se em compreender as particularidades dos territórios e implicar os principais agentes de interesse na análise dos efeitos das alterações climáticas.</p>`
+    }
+  },
+
+  bienvenida: {
+    img: 'fotonoticias.png',
+    tagClass: 'tag-proyecto',
+    es: {
+      tag: 'Proyecto',
+      date: '17 de octubre de 2025',
+      title: 'Te damos la bienvenida a MAC‑IDAFE: la Red de Escuelas por la Acción Climática de la Macaronesia',
+      body: `<p>El proyecto MAC‑IDAFE es un proyecto cofinanciado a través del Programa INTERREG MAC 2021–2027. La iniciativa conecta centros educativos de Canarias, Madeira, Azores y Cabo Verde para trabajar de forma conjunta en educación y adaptación en materia de cambio climático, estableciendo una cooperación territorial que trasciende fronteras y fortalece la respuesta educativa ante los retos climáticos compartidos.</p>
+<h3>Un enfoque regional para un desafío global</h3>
+<p>MAC‑IDAFE nace con la convicción de que la educación es una herramienta clave para transformar cómo nos relacionamos con el medio ambiente. El proyecto articula una comunidad de aprendizaje que pretende compartir una metodología común con recursos adaptados a la peculiaridad de cada territorio.</p>
+<p>La red buscará promover el intercambio de buenas prácticas entre centros educativos, facilitando que docentes y estudiantes puedan construir soluciones conjuntas ante problemas ambientales como la pérdida de biodiversidad, la escasez de recursos hídricos o los fenómenos meteorológicos extremos.</p>
+<h3>Cooperación INTERREG para la sostenibilidad</h3>
+<p>El proyecto reúne a la Consejería de Transición Ecológica y Energía del Gobierno de Canarias y Gesplan en Canarias, a la DRAM del Gobierno de Madeira, a la Secretaria Regional de Medio Ambiente y Acción Climática del Gobierno de Azores y al INMG en Cabo Verde.</p>`
+    },
+    pt: {
+      tag: 'Projeto',
+      date: '17 de outubro de 2025',
+      title: 'Bem-vindos ao MAC‑IDAFE: a Rede de Escolas pela Ação Climática da Macaronésia',
+      body: `<p>O projeto MAC‑IDAFE é cofinanciado pelo Programa INTERREG MAC 2021–2027 e liga estabelecimentos de ensino das Canárias, da Madeira, dos Açores e de Cabo Verde para trabalhar conjuntamente em educação e adaptação às alterações climáticas.</p>
+<h3>Uma abordagem regional para um desafio global</h3>
+<p>O MAC‑IDAFE nasce com a convicção de que a educação é uma ferramenta fundamental para transformar a relação com o meio ambiente, articulando uma comunidade de aprendizagem com metodologia comum e recursos adaptados a cada território.</p>`
+    }
+  }
+
+};
+
+/* ══════════════════════════════════════
+   FUNCIONES DE MODAL
+   ══════════════════════════════════════ */
+function openModal(id) {
+  const entry = modalData[id];
+  if (!entry) return;
+  const lang = (typeof getLang === 'function' ? getLang() : null) || localStorage.getItem('macidafe-lang') || 'es';
+  const data = entry[lang] || entry.es;
+
+  const heroImg = document.getElementById('modal-hero-img');
+  if (heroImg) {
+    heroImg.src = entry.img || 'fotonoticias.png';
+    heroImg.alt = '';
+    heroImg.style.objectPosition = entry.imgPosition || 'center 20%';
+  }
+
+  document.getElementById('modal-body').innerHTML =
+    `<div class="modal-tag"><span class="card-tag ${entry.tagClass}">${data.tag}</span></div>` +
+    `<p class="modal-date">${data.date}</p>` +
+    `<h2 class="modal-title">${data.title}</h2>` +
+    `<div class="modal-content">${data.body}</div>`;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ══════════════════════════════════════
+   FILTROS
+   ══════════════════════════════════════ */
+const filtros = document.querySelectorAll('.filtro-btn');
+filtros.forEach(btn => btn.addEventListener('click', () => {
+  filtros.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const tag = btn.dataset.tag;
+  document.querySelectorAll('.news-card').forEach(card => {
+    (tag === 'all' || card.dataset.tags.includes(tag))
+      ? card.classList.remove('hidden')
+      : card.classList.add('hidden');
+  });
+}));
+
+/* ══════════════════════════════════════
+   HEADER SCROLL
+   ══════════════════════════════════════ */
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  header.style.boxShadow = window.scrollY > 10
+    ? '0 4px 22px rgba(0,0,0,.15)'
+    : '0 2px 10px rgba(0,0,0,.10)';
+}, { passive: true });
+
+/* ══════════════════════════════════════
+   REVEAL ON SCROLL
+   ══════════════════════════════════════ */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const sibs = Array.from(entry.target.parentElement.children).filter(el => el.classList.contains('reveal'));
+    const idx = sibs.indexOf(entry.target);
+    entry.target.style.transitionDelay = (idx * 0.08) + 's';
+    entry.target.classList.add('visible');
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0 });
+revealEls.forEach(el => io.observe(el));
+
+/* ══════════════════════════════════════
+   NAV HAMBURGER
+   ══════════════════════════════════════ */
+(function() {
+  const toggle = document.getElementById('nav-toggle');
+  const nav    = document.querySelector('nav');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+  document.addEventListener('click', e => {
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('open');
+      toggle.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+
+setTimeout(() => {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    if (!el.classList.contains('visible')) el.classList.add('visible');
+  });
+}, 800);
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
