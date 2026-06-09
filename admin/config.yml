@@ -12,7 +12,9 @@ collections:
     label: "Noticias"
     folder: "_noticias"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.titulo_es}}"
+    identifier_field: titulo_es
+    summary: "{{titulo_es}} · {{fecha}}"
     editor:
       preview: false
     fields:
