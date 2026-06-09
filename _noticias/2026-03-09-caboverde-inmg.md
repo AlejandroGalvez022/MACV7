@@ -3,7 +3,7 @@ imagen: uploads/foto_caboverde_inmg.png
 imagenPos: center top
 categoria: coordinacion
 fecha: 9 de marzo de 2026
-destacada: true
+destacada: false
 titulo_es: MAC-IDAFE celebra en Cabo Verde su primera reunion de coordinacion
   con el INMG español2
 extracto_es: El proyecto celebro en Praia su primera reunion presencial de
