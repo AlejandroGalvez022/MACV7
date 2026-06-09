@@ -233,11 +233,6 @@ setTimeout(() => {
 <script src="lang.js"></script>
 <script>
 // Re-render CMS cards al cambiar idioma
-const _origSetLang = typeof setLang === "function" ? setLang : null;
-function setLang(lang) {
-  if (_origSetLang) _origSetLang(lang);
-  if (window._cmsRenderCards) window._cmsRenderCards(lang);
-}
 
 /* ══════════════════════════════════════
    CARGA DE NOTICIAS DESDE CMS (Decap/GitHub)
@@ -249,7 +244,7 @@ function setLang(lang) {
   const API    = `https://api.github.com/repos/${REPO}/contents/${FOLDER}?ref=${BRANCH}`;
 
   function parseFrontmatter(text) {
-    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
     if (!match) return {};
     const fm = {};
     const lines = match[1].split('\n');
@@ -400,6 +395,14 @@ function setLang(lang) {
 
     // Escuchar cambios de idioma
     window._cmsRenderCards = renderCMSCards;
+
+    // Escuchar cambios de idioma sin sobreescribir setLang
+    document.querySelectorAll('.lang-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        setTimeout(() => renderCMSCards(lang), 50);
+      });
+    });
 
   } catch(e) {
     console.warn('CMS load error:', e);
