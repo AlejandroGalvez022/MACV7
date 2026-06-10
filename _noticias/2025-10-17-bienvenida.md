@@ -13,19 +13,19 @@ extracto_es: El proyecto MAC‑IDAFE, cofinanciado por el Programa INTERREG MAC
 cuerpo_es: >
   El proyecto MAC-IDAFE es cofinanciado por el Programa INTERREG MAC 2021-2027.
   Conecta centros educativos de Canarias, Madeira, Azores y Cabo Verde para
-  trabajar en educacion y adaptacion climatica.
+  trabajar en educación y adaptación climática.
 
 
-  ### Un enfoque regional para un desafio global
+  ### Un enfoque regional para un desafío global
 
 
-  MAC-IDAFE nace con la conviccion de que la educacion es una herramienta clave para transformar como nos relacionamos con el medio ambiente.
+  MAC-IDAFE nace con la convicción de que la educación es una herramienta clave para transformar como nos relacionamos con el medio ambiente.
 
 
-  ### Cooperacion INTERREG para la sostenibilidad
+  ### Cooperación INTERREG para la sostenibilidad
 
 
-  El proyecto reune a Gesplan (Canarias), DRAM (Madeira), Secretaria Regional de Medio Ambiente (Azores) e INMG (Cabo Verde).
+  El proyecto reúne a Gesplan (Canarias), DRAM (Madeira), Secretaria Regional de Medio Ambiente (Azores) e INMG (Cabo Verde).
 titulo_pt: "Bem-vindos ao MAC‑IDAFE: a Rede de Escolas pela Ação Climática da Macaronésia"
 extracto_pt: O projeto MAC‑IDAFE, cofinanciado pelo Programa INTERREG MAC
   2021–2027, liga estabelecimentos de ensino das Canárias, da Madeira, dos
