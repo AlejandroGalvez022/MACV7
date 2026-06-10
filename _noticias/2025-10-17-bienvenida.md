@@ -5,7 +5,7 @@ categoria: proyecto
 fecha: 17 de octubre de 2025
 destacada: false
 titulo_es: "Te damos la bienvenida a MAC‑IDAFE: la Red de Escuelas por la Acción
-  Climática de la Macaronesia PRUEBA V1"
+  Climática de la Macaronesia"
 extracto_es: El proyecto MAC‑IDAFE, cofinanciado por el Programa INTERREG MAC
   2021–2027, conecta centros educativos de Canarias, Madeira, Azores y Cabo
   Verde para trabajar conjuntamente en educación y adaptación frente al cambio
