@@ -1,2 +1,2 @@
 [build]
-  ignore = "git diff --quiet HEAD^ HEAD -- . ':(exclude)_noticias' ':(exclude)uploads'"
+  ignore = "git diff --quiet HEAD^ HEAD -- . ':!_noticias' ':!uploads'"
