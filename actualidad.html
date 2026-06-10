@@ -290,9 +290,8 @@ setTimeout(() => {
   function buildCard(fm, lang, id) {
     const titulo  = fm[`titulo_${lang}`]  || fm.titulo_es  || '';
     const extracto= fm[`extracto_${lang}`]|| fm.extracto_es|| '';
-    const GITHUB_RAW = 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/';
     const imagenRaw = fm.imagen || 'fotonoticias.png';
-    const imagen = imagenRaw.startsWith('uploads/') ? GITHUB_RAW + imagenRaw : imagenRaw;
+    const imagen = imagenRaw.startsWith('uploads/') ? 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/' + imagenRaw : imagenRaw;
     const imgPos  = fm.imagenPos || 'center center';
     const cat     = fm.categoria || 'proyecto';
     const fecha   = fm.fecha || '';
