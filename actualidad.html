@@ -290,11 +290,13 @@ setTimeout(() => {
   function buildCard(fm, lang, id) {
     const titulo  = fm[`titulo_${lang}`]  || fm.titulo_es  || '';
     const extracto= fm[`extracto_${lang}`]|| fm.extracto_es|| '';
-    const imagen  = fm.imagen || 'fotonoticias.png';
+    const GITHUB_RAW = 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/';
+    const imagenRaw = fm.imagen || 'fotonoticias.png';
+    const imagen = imagenRaw.startsWith('uploads/') ? GITHUB_RAW + imagenRaw : imagenRaw;
     const imgPos  = fm.imagenPos || 'center center';
     const cat     = fm.categoria || 'proyecto';
     const fecha   = fm.fecha || '';
-    const destacada = fm.destacada === 'true';
+    const destacada = fm.destacada === true || fm.destacada === 'true';
 
     return `
     <article class="news-card ${destacada ? 'featured' : ''} reveal cms-card visible" data-tags="${cat}" data-id="${id}">
@@ -335,7 +337,7 @@ setTimeout(() => {
       const id = `cms_${i}`;
       const fm = n.fm;
       modalData[id] = {
-        img: fm.imagen || 'fotonoticias.png',
+        img: imagen,
         imgPosition: fm.imagenPos || 'center center',
         tagClass: tagClass(fm.categoria || 'proyecto'),
         es: {
