@@ -335,8 +335,10 @@ setTimeout(() => {
     noticias.forEach((n, i) => {
       const id = `cms_${i}`;
       const fm = n.fm;
+      const imagenRaw2 = fm.imagen || 'fotonoticias.png';
+      const imagenModal = imagenRaw2.startsWith('uploads/') ? 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/' + imagenRaw2 : imagenRaw2;
       modalData[id] = {
-        img: imagen,
+        img: imagenModal,
         imgPosition: fm.imagenPos || 'center center',
         tagClass: tagClass(fm.categoria || 'proyecto'),
         es: {
