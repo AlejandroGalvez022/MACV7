@@ -241,7 +241,7 @@ setTimeout(() => {
   const REPO   = 'AlejandroGalvez022/MACV7';
   const BRANCH = 'main';
   const FOLDER = '_noticias';
-  const API    = `https://api.github.com/repos/${REPO}/contents/${FOLDER}?ref=${BRANCH}`;
+  const API    = `https://api.github.com/repos/${REPO}/contents/${FOLDER}?ref=${BRANCH}&t=${Date.now()}`;
 
   function parseFrontmatter(text) {
     const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
@@ -337,7 +337,7 @@ setTimeout(() => {
     const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== '.gitkeep' && f.name !== '.gitkeep.txt');
     if (!mdFiles.length) return;
 
-    const contents = await Promise.all(mdFiles.map(f => fetch(f.download_url).then(r => r.text())));
+    const contents = await Promise.all(mdFiles.map(f => fetch(f.download_url + '?t=' + Date.now()).then(r => r.text())));
     const noticias = contents.map((text, i) => ({ fm: parseFrontmatter(text), raw: text, name: mdFiles[i].name }))
                              .filter(n => n.fm.titulo_es);
 
