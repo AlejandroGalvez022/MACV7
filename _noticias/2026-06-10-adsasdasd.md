@@ -3,7 +3,7 @@ imagen: /uploads/fotonoticias.png
 imagenPos: center center
 categoria: formacion
 fecha: 10 de June de 2026
-destacada: true
+destacada: false
 sep_es: ""
 titulo_es: adsasdasd
 extracto_es: asdadsasd
