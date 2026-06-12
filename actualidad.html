@@ -293,6 +293,35 @@ setTimeout(() => {
     return lang === 'pt' ? 'Ler notícia completa' : 'Leer noticia completa';
   }
 
+  // Normaliza la fecha (venga en es/en/pt) y la muestra en el idioma de la noticia
+  function formatFecha(raw, lang) {
+    if (!raw) return '';
+    const s = String(raw).trim();
+    const M = {
+      enero:0, january:0, janeiro:0,
+      febrero:1, february:1, fevereiro:1,
+      marzo:2, march:2, 'março':2, marco:2,
+      abril:3, april:3,
+      mayo:4, may:4, maio:4,
+      junio:5, june:5, junho:5,
+      julio:6, july:6, julho:6,
+      agosto:7, august:7,
+      septiembre:8, setiembre:8, september:8, setembro:8,
+      octubre:9, october:9, outubro:9,
+      noviembre:10, november:10, novembro:10,
+      diciembre:11, december:11, dezembro:11
+    };
+    let d = null, m;
+    if ((m = s.match(/^(\d{4})-(\d{2})-(\d{2})/))) {
+      d = new Date(+m[1], +m[2]-1, +m[3]);
+    } else if ((m = s.match(/(\d{1,2})\s+de\s+([\p{L}]+)\s+de\s+(\d{4})/iu))) {
+      const mes = M[m[2].toLowerCase()];
+      if (mes != null) d = new Date(+m[3], mes, +m[1]);
+    }
+    if (!d || isNaN(d)) return s; // si no se reconoce, deja el texto original
+    return d.toLocaleDateString(lang === 'pt' ? 'pt-PT' : 'es-ES', { day:'numeric', month:'long', year:'numeric' });
+  }
+
   function buildCard(n, lang, id) {
     const loc = n[lang] || n.es || n.pt;
     const fb  = n.es || n.pt;
@@ -303,7 +332,7 @@ setTimeout(() => {
     const imagen = imagenRaw.startsWith('uploads/') ? 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/' + imagenRaw : imagenRaw;
     const imgPos  = fm.imagenPos || 'center center';
     const cat     = fm.categoria || 'proyecto';
-    const fecha   = fm.fecha || '';
+    const fecha   = formatFecha(fm.fecha || '', lang);
     const destacada = fm.destacada === true || fm.destacada === 'true';
 
     return `
@@ -375,13 +404,13 @@ setTimeout(() => {
         tagClass: tagClass(fm.categoria || 'proyecto'),
         es: {
           tag: tagLabel(fm.categoria, 'es'),
-          date: fm.fecha || '',
+          date: formatFecha(fm.fecha, 'es'),
           title: (es && es.fm.titulo) || '',
           body: markdownToHtml((es && es.body) || '')
         },
         pt: {
           tag: tagLabel(fm.categoria, 'pt'),
-          date: fm.fecha || '',
+          date: formatFecha(fm.fecha, 'pt'),
           title: (pt && pt.fm.titulo) || (es && es.fm.titulo) || '',
           body: markdownToHtml((pt && pt.body) || (es && es.body) || '')
         }
