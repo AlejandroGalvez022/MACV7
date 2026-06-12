@@ -36,8 +36,8 @@ collections:
         widget: "hidden"
         default: ""
         required: false
-      - { label: "Título (ES)", name: "titulo_es", widget: "string" }
-      - { label: "Extracto (ES)", name: "extracto_es", widget: "text", hint: "Resumen corto que aparece en la tarjeta" }
+      - { label: "Título (ES)", name: "titulo_es", widget: "string", pattern: ['^.{1,60}$', 'El título no puede superar los 60 caracteres'] }
+      - { label: "Extracto (ES)", name: "extracto_es", widget: "text", hint: "Resumen corto que aparece en la tarjeta (máx. 500 caracteres)", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
       - { label: "Cuerpo completo (ES)", name: "cuerpo_es", widget: "text" }
 
       - label: "── PORTUGUÊS ──"
@@ -45,6 +45,6 @@ collections:
         widget: "hidden"
         default: ""
         required: false
-      - { label: "Título (PT)", name: "titulo_pt", widget: "string" }
-      - { label: "Extracto (PT)", name: "extracto_pt", widget: "text", hint: "Resumo curto que aparece no cartão" }
+      - { label: "Título (PT)", name: "titulo_pt", widget: "string", pattern: ['^.{1,60}$', 'El título no puede superar los 60 caracteres'] }
+      - { label: "Extracto (PT)", name: "extracto_pt", widget: "text", hint: "Resumo curto que aparece no cartão (máx. 500 caracteres)", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
       - { label: "Cuerpo completo (PT)", name: "cuerpo_pt", widget: "text" }
