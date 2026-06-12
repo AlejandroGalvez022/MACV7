@@ -198,6 +198,11 @@
     .modal-content p { font-size: 1.1rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 22px; }
     .modal-content p:last-child { margin-bottom: 0; }
     .modal-content strong { color: var(--text-dark); }
+    /* Evita que palabras largas sin espacios se salgan del modal */
+    .modal-title, .modal-content, .modal-content p, .modal-content li {
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
     .modal-content h3 {
       font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem;
       color: var(--blue-dark); margin: 32px 0 14px;
