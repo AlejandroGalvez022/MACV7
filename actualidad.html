@@ -255,6 +255,12 @@ setTimeout(() => {
     }
   }
 
+  // Lee el cuerpo Markdown que va DEBAJO del frontmatter (inmune a los espacios del YAML)
+  function parseBody(text) {
+    const m = text.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?([\s\S]*)$/);
+    return m ? m[1].trim() : '';
+  }
+
     function markdownToHtml(md) {
     if (!md) return '';
     return md
@@ -287,9 +293,12 @@ setTimeout(() => {
     return lang === 'pt' ? 'Ler notícia completa' : 'Leer noticia completa';
   }
 
-  function buildCard(fm, lang, id) {
-    const titulo  = fm[`titulo_${lang}`]  || fm.titulo_es  || '';
-    const extracto= fm[`extracto_${lang}`]|| fm.extracto_es|| '';
+  function buildCard(n, lang, id) {
+    const loc = n[lang] || n.es || n.pt;
+    const fb  = n.es || n.pt;
+    const titulo   = (loc && loc.fm.titulo)   || (fb && fb.fm.titulo)   || '';
+    const extracto = (loc && loc.fm.extracto) || (fb && fb.fm.extracto) || '';
+    const fm = n.fm;
     const imagenRaw = fm.imagen || 'fotonoticias.png';
     const imagen = imagenRaw.startsWith('uploads/') ? 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/' + imagenRaw : imagenRaw;
     const imgPos  = fm.imagenPos || 'center center';
@@ -319,14 +328,36 @@ setTimeout(() => {
     const res = await fetch(API);
     if (!res.ok) return;
     const files = await res.json();
-    const mdFiles = files.filter(f => f.name.endsWith('.md') && f.name !== '.gitkeep' && f.name !== '.gitkeep.txt');
+    const mdFiles = files.filter(f => /\.(es|pt)\.md$/.test(f.name));
     if (!mdFiles.length) return;
 
-    const contents = await Promise.all(mdFiles.map(f => fetch(f.download_url).then(r => r.text())));
-    const noticias = contents.map((text, i) => ({ fm: parseFrontmatter(text), raw: text, name: mdFiles[i].name }))
-                             .filter(n => n.fm.titulo_es);
+    // Agrupar archivos por noticia (mismo slug base, distinto idioma)
+    const groups = {};
+    mdFiles.forEach(f => {
+      const m = f.name.match(/^(.*)\.(es|pt)\.md$/);
+      if (!m) return;
+      (groups[m[1]] = groups[m[1]] || {})[m[2]] = f;
+    });
 
-    noticias.sort((a, b) => new Date(b.fm.fecha || 0) - new Date(a.fm.fecha || 0));
+    // Descargar y parsear cada idioma; el cuerpo se lee del Markdown (fuera del YAML)
+    const noticias = [];
+    await Promise.all(Object.keys(groups).map(async base => {
+      const g = groups[base];
+      const entry = { base: base };
+      for (const loc of ['es', 'pt']) {
+        if (!g[loc]) continue;
+        const text = await fetch(g[loc].download_url).then(r => r.text());
+        entry[loc] = { fm: parseFrontmatter(text), body: parseBody(text) };
+      }
+      const baseLoc = entry.es || entry.pt;
+      if (baseLoc && baseLoc.fm.titulo) {
+        entry.fm = baseLoc.fm; // campos compartidos (imagen, fecha, categoría, destacada...)
+        noticias.push(entry);
+      }
+    }));
+
+    // El prefijo del nombre es YYYY-MM-DD; orden ascendente + inserción afterbegin = más reciente arriba
+    noticias.sort((a, b) => a.base.localeCompare(b.base));
 
     // Guardar datos globalmente para re-render al cambiar idioma
     window._cmsNoticias = noticias;
@@ -337,6 +368,7 @@ setTimeout(() => {
       const fm = n.fm;
       const imagenRaw2 = fm.imagen || 'fotonoticias.png';
       const imagenModal = imagenRaw2.startsWith('uploads/') ? 'https://raw.githubusercontent.com/AlejandroGalvez022/MACV7/main/' + imagenRaw2 : imagenRaw2;
+      const es = n.es, pt = n.pt;
       modalData[id] = {
         img: imagenModal,
         imgPosition: fm.imagenPos || 'center center',
@@ -344,14 +376,14 @@ setTimeout(() => {
         es: {
           tag: tagLabel(fm.categoria, 'es'),
           date: fm.fecha || '',
-          title: fm.titulo_es || '',
-          body: markdownToHtml(fm.cuerpo_es || '')
+          title: (es && es.fm.titulo) || '',
+          body: markdownToHtml((es && es.body) || '')
         },
         pt: {
           tag: tagLabel(fm.categoria, 'pt'),
           date: fm.fecha || '',
-          title: fm.titulo_pt || fm.titulo_es || '',
-          body: markdownToHtml(fm.cuerpo_pt || fm.cuerpo_es || '')
+          title: (pt && pt.fm.titulo) || (es && es.fm.titulo) || '',
+          body: markdownToHtml((pt && pt.body) || (es && es.body) || '')
         }
       };
     });
@@ -365,7 +397,7 @@ setTimeout(() => {
 
       noticias.forEach((n, i) => {
         const id = `cms_${i}`;
-        const html = buildCard(n.fm, lang, id);
+        const html = buildCard(n, lang, id);
         grid.insertAdjacentHTML('afterbegin', html);
         if (tagActivo !== 'all') {
           const card = grid.querySelector(`[data-id="${id}"]`);

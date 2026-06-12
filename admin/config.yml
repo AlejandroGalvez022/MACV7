@@ -7,44 +7,40 @@ public_folder: "/uploads"
 
 locale: 'es'
 
+# Internacionalización: un archivo por idioma (ES y PT)
+i18n:
+  structure: multiple_files
+  locales: [es, pt]
+  default_locale: es
+
 collections:
   - name: "noticias"
     label: "Noticias"
     folder: "_noticias"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{fields.titulo_es}}"
-    identifier_field: titulo_es
-    summary: "{{titulo_es}} · {{fecha}}"
+    i18n: true
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.titulo}}"
+    identifier_field: titulo
+    summary: "{{titulo}} · {{fecha}}"
     editor:
       preview: false
     fields:
-      - { label: "Imagen", name: "imagen", widget: "image" }
-      - { label: "Posición imagen", name: "imagenPos", widget: "string", default: "center center", required: false, hint: "Ej: center top, center center, center bottom" }
+      # Campos compartidos entre ES y PT (no se traducen)
+      - { label: "Imagen", name: "imagen", widget: "image", i18n: duplicate }
+      - { label: "Posición imagen", name: "imagenPos", widget: "string", default: "center center", required: false, i18n: duplicate, hint: "Ej: center top, center center, center bottom" }
       - label: "Categoría"
         name: "categoria"
         widget: "select"
+        i18n: duplicate
         options:
           - { label: "Coordinación", value: "coordinacion" }
           - { label: "Formación", value: "formacion" }
           - { label: "Red de Escuelas", value: "red" }
           - { label: "Proyecto", value: "proyecto" }
-      - { label: "Fecha", name: "fecha", widget: "datetime", format: "DD [de] MMMM [de] YYYY", date_format: "DD/MM/YYYY", time_format: false }
-      - { label: "Destacada (aparece grande)", name: "destacada", widget: "boolean", default: false, required: false }
+      - { label: "Fecha", name: "fecha", widget: "datetime", i18n: duplicate, format: "DD [de] MMMM [de] YYYY", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Destacada (aparece grande)", name: "destacada", widget: "boolean", default: false, required: false, i18n: duplicate }
 
-      - label: "── ESPAÑOL ──"
-        name: "sep_es"
-        widget: "hidden"
-        default: ""
-        required: false
-      - { label: "Título (ES)", name: "titulo_es", widget: "string", hint: "Máximo 140 caracteres", pattern: ['^.{1,140}$', 'El título no puede superar los 140 caracteres'] }
-      - { label: "Extracto (ES)", name: "extracto_es", widget: "text", hint: "Resumen corto que aparece en la tarjeta · máximo 500 caracteres", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
-      - { label: "Cuerpo completo (ES)", name: "cuerpo_es", widget: "text", hint: "Texto completo de la noticia · máximo 2000 caracteres", pattern: ['^[\s\S]{1,2000}$', 'El cuerpo no puede superar los 2000 caracteres'] }
-
-      - label: "── PORTUGUÊS ──"
-        name: "sep_pt"
-        widget: "hidden"
-        default: ""
-        required: false
-      - { label: "Título (PT)", name: "titulo_pt", widget: "string", hint: "Máximo 140 caracteres", pattern: ['^.{1,140}$', 'El título no puede superar los 140 caracteres'] }
-      - { label: "Extracto (PT)", name: "extracto_pt", widget: "text", hint: "Resumo curto que aparece no cartão · máximo 500 caracteres", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
-      - { label: "Cuerpo completo (PT)", name: "cuerpo_pt", widget: "text", hint: "Texto completo da notícia · máximo 2000 caracteres", pattern: ['^[\s\S]{1,2000}$', 'El cuerpo no puede superar los 2000 caracteres'] }
+      # Campos traducibles (uno por idioma)
+      - { label: "Título", name: "titulo", widget: "string", i18n: true, hint: "Máximo 140 caracteres", pattern: ['^.{1,140}$', 'El título no puede superar los 140 caracteres'] }
+      - { label: "Extracto", name: "extracto", widget: "text", i18n: true, hint: "Resumen corto que aparece en la tarjeta · máximo 500 caracteres", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
+      - { label: "Cuerpo completo", name: "body", widget: "markdown", i18n: true, hint: "Texto completo de la noticia. Aquí puedes escribir todo lo largo que necesites." }
