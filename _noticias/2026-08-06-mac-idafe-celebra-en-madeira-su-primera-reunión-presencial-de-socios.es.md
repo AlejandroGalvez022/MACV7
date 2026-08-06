@@ -1,5 +1,5 @@
 ---
-imagen: /uploads/image00007-1-.jpeg
+imagen: /uploads/mac-idafe_banner-noticias.pptx-1-.png
 imagenPos: center center
 categoria: coordinacion
 fecha: 30 de April de 2026
