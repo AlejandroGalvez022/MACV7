@@ -5,7 +5,11 @@ categoria: proyecto
 fecha: 09 de April de 2026
 destacada: false
 titulo: No MAC-IDAFE continuamos na fase de diagnóstico e a tua opinião é fundamental
-extracto: Nesta primeira fase, que constitui o ponto de partida fundamental do projeto, a equipa está a dedicar os seus esforços a compreender as especificidades dos estabelecimentos de ensino das Canárias, Madeira, Açores e Cabo Verde, reconhecendo que cada arquipélago apresenta contextos próprios que exigem abordagens diferenciadas.
+extracto: Nesta primeira fase, que constitui o ponto de partida fundamental do
+  projeto, a equipa está a dedicar os seus esforços a compreender as
+  especificidades dos estabelecimentos de ensino das Canárias, Madeira, Açores e
+  Cabo Verde, reconhecendo que cada arquipélago apresenta contextos próprios que
+  exigem abordagens diferenciadas.
 ---
 
 Por isso, continuamos na fase de diagnóstico e precisamos da tua ajuda! Desenvolvemos alguns questionários para analisar o nível de conhecimento sobre alterações climáticas em cada território.
