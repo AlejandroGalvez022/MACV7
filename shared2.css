@@ -504,9 +504,17 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
 }
 .feder-ristra a:hover,
 .feder-ristra a:focus-visible{ opacity: .68; }
+/* ⚠ EL height VA CON !important A PROPÓSITO. La hoja fuerza el alto de los
+   logos de socios en dos sitios —`.socio-col-box img{height:80px}` y
+   `.socio-col:nth-child(2) .socio-col-box img{height:120px}`— y a la ristra no
+   la afectaban porque el <img> original llevaba su propio `style` en línea, que
+   gana siempre. Al partirla en tres <img> sin estilo en línea, esas reglas se
+   la comieron: medido, los logos pasaban de 49px de alto a 120 y salían
+   ESTIRADOS. Aquí el alto lo manda siempre la proporción de la imagen. */
 .feder-ristra img{
   width: 100%;
-  height: auto;
+  height: auto !important;
+  max-width: none;
   display: block;
 }
 .feder-ristra .f-gesplan{ flex: 0 0 17.1566%; }
