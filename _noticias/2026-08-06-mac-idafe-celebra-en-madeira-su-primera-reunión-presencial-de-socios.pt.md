@@ -4,4 +4,5 @@ imagenPos: center center
 categoria: coordinacion
 fecha: 30 de June de 2026
 destacada: false
+titulo: ""
 ---
