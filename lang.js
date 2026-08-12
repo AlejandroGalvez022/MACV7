@@ -286,6 +286,8 @@ const I18N = {
     'trans.ind.acumulado':  'acumulado',
 
     'trans.prog.title':     'Programa e Información Oficial',
+    'trans.desc.title':     'Descargables',
+    'trans.desc.intro':     'Documentos oficiales descargables: estrategias, planes, normativa y memorias.',
     'trans.pc1.h3':         'Programa',
     'trans.pc1.p':          'Interreg MAC 2021–2027',
     'trans.pc1.sub':        'Programa de Cooperación Territorial Interreg VI-D Madeira-Azores-Canarias (MAC) 2021–2027 — II Convocatoria de Capitalización',
@@ -614,6 +616,8 @@ const I18N = {
     'trans.ind.acumulado':  'acumulado',
 
     'trans.prog.title':     'Programa e Informação Oficial',
+    'trans.desc.title':     'Documentos',
+    'trans.desc.intro':     'Documentos oficiais para descarregar: estratégias, planos, legislação e relatórios.',
     'trans.pc1.h3':         'Programa',
     'trans.pc1.p':          'Interreg MAC 2021–2027',
     'trans.pc1.sub':        'Programa de Cooperação Territorial Interreg VI-D Madeira-Açores-Canárias (MAC) 2021–2027 — II Convocatória de Capitalização',

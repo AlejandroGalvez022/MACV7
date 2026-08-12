@@ -94,6 +94,21 @@
   </div>
 </section>
 
+<!-- ══ DESCARGABLES (12-ago-2026) ═════════════════════════════════════════════
+     "Documentos oficiales descargables: estrategias, planes, normativa,
+     memorias." Va aquí, dentro de Transparencia, y no como página nueva: el
+     menú ya lleva cinco entradas más Acceso Privado, y unos documentos
+     oficiales son justo lo que se espera encontrar en esta página.
+     Los sube el propio cliente desde el CMS (colección "Descargables") y
+     aparecen solos, igual que las noticias. Si no hay ninguno, la sección
+     entera NO se pinta — así no queda un apartado vacío en la web. ═══════ -->
+<section id="descargables" hidden>
+  <h2 class="section-title reveal" data-i18n="trans.desc.title">Descargables</h2>
+  <p class="desc-intro reveal" data-i18n="trans.desc.intro">Documentos oficiales descargables: estrategias, planes, normativa y memorias.</p>
+  <div class="desc-filtros" id="descFiltros"></div>
+  <div class="desc-grid" id="descGrid"></div>
+</section>
+
 <section id="socios" style="padding-bottom:60px;">
   <h2 class="section-title reveal" data-i18n="index.socios.title">Socios del Proyecto</h2>
 
@@ -190,6 +205,174 @@
   })();
   setTimeout(() => { document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => { if (!el.classList.contains('visible')) el.classList.add('visible'); }); }, 800);
 </script>
+
 <script src="lang.js"></script>
+<script id="descargables-js">
+/* ══ DESCARGABLES ═══════════════════════════════════════════════════════════
+   Lee la colección "descargables" del CMS por la API de GitHub, igual que
+   actualidad.html hace con las noticias: mismo repo, misma rama y el mismo
+   patrón de un archivo por idioma (nombre.es.md / nombre.pt.md).
+   Si no hay ni un documento, la sección se queda oculta. ═════════════════ */
+(async function cargarDescargables(){
+  const REPO   = 'AlejandroGalvez022/MACV7';
+  const BRANCH = 'main';
+  const FOLDER = '_descargables';
+  const API    = `https://api.github.com/repos/${REPO}/contents/${FOLDER}?ref=${BRANCH}`;
+
+  const seccion = document.getElementById('descargables');
+  const grid    = document.getElementById('descGrid');
+  const filtros = document.getElementById('descFiltros');
+  if(!seccion || !grid) return;
+
+  const CATS = ['estrategias','planes','normativa','memorias'];
+  const ETIQ = {
+    es: { estrategias:'Estrategias', planes:'Planes', normativa:'Normativa', memorias:'Memorias',
+          todos:'Todos', descargar:'Descargar', vacio:'Todavía no hay documentos publicados.' },
+    pt: { estrategias:'Estratégias', planes:'Planos', normativa:'Legislação', memorias:'Relatórios',
+          todos:'Todos', descargar:'Descarregar', vacio:'Ainda não há documentos publicados.' }
+  };
+  const idioma = () => (typeof getLang === 'function' ? getLang() : localStorage.getItem('macidafe-lang')) || 'es';
+  const T = (k) => (ETIQ[idioma()] || ETIQ.es)[k] || k;
+
+  /* el mismo lector de YAML sencillo que usa actualidad.html */
+  function frontmatter(texto){
+    const m = texto.match(/^---\s*\n([\s\S]*?)\n---/);
+    if(!m) return {};
+    const fm = {};
+    m[1].split('\n').forEach(function(linea){
+      const i = linea.indexOf(':');
+      if(i < 1) return;
+      const k = linea.slice(0, i).trim();
+      let v = linea.slice(i + 1).trim();
+      if((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+      fm[k] = v;
+    });
+    return fm;
+  }
+
+  /* La fecha de esta colección va en ISO (YYYY-MM-DD) a propósito, así que
+     aquí no hay nombres de mes que puedan venir en otro idioma. */
+  function fechaLegible(iso, lang){
+    const m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if(!m) return '';
+    const d = new Date(+m[1], +m[2]-1, +m[3]);
+    if(isNaN(d)) return '';
+    return d.toLocaleDateString(lang === 'pt' ? 'pt-PT' : 'es-ES', { day:'numeric', month:'long', year:'numeric' });
+  }
+
+  function extension(ruta){
+    const m = String(ruta || '').match(/\.([a-z0-9]+)(?:\?|$)/i);
+    return m ? m[1].toUpperCase() : 'DOC';
+  }
+  function pesoLegible(bytes){
+    if(!bytes || isNaN(bytes)) return '';
+    const mb = bytes / 1048576;
+    if(mb >= 1) return mb.toFixed(1).replace('.', ',') + ' MB';
+    return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+  }
+
+  let docs = [];
+  try {
+    const res = await fetch(API);
+    if(!res.ok) return;                    /* carpeta aún sin crear: nada que enseñar */
+    const files = (await res.json()).filter(f => /\.(es|pt)\.md$/.test(f.name));
+    if(!files.length) return;
+
+    const grupos = {};
+    files.forEach(function(f){
+      const m = f.name.match(/^(.*)\.(es|pt)\.md$/);
+      if(m) (grupos[m[1]] = grupos[m[1]] || {})[m[2]] = f;
+    });
+
+    await Promise.all(Object.keys(grupos).map(async function(base){
+      const g = grupos[base];
+      const doc = { base: base };
+      for(const loc of ['es','pt']){
+        if(!g[loc]) continue;
+        doc[loc] = frontmatter(await fetch(g[loc].download_url).then(r => r.text()));
+      }
+      const bl = doc.es || doc.pt;
+      if(bl && bl.titulo && bl.archivo) { doc.fm = bl; docs.push(doc); }
+    }));
+  } catch(e){ return; }
+
+  if(!docs.length) return;
+
+  /* más reciente arriba. Aquí SÍ se ordena por la fecha del documento (no por
+     el nombre del archivo), que es lo que la persona que lo sube espera. */
+  docs.sort((a,b) => String(b.fm.fecha || '').localeCompare(String(a.fm.fecha || '')));
+
+  /* el peso real de cada archivo, si el servidor lo dice. Es un extra: si falla
+     (o se abre la web en local por file://), simplemente no se enseña. */
+  await Promise.all(docs.map(async function(d){
+    try {
+      const r = await fetch(d.fm.archivo, { method:'HEAD' });
+      const L = r.headers.get('content-length');
+      if(L) d.peso = pesoLegible(+L);
+    } catch(e){ /* sin peso y ya está */ }
+  }));
+
+  let filtroActivo = 'todos';
+
+  function pinta(){
+    const lang = idioma();
+    const lista = docs.filter(d => filtroActivo === 'todos' || (d.fm.categoria || '') === filtroActivo);
+
+    grid.innerHTML = lista.map(function(d){
+      const loc  = d[lang] || d.es || d.pt;
+      const tit  = (loc && loc.titulo) || d.fm.titulo || '';
+      const des  = (loc && loc.descripcion) || '';
+      const cat  = d.fm.categoria || '';
+      const ext  = extension(d.fm.archivo);
+      const meta = [ext, d.peso, fechaLegible(d.fm.fecha, lang)].filter(Boolean).join(' · ');
+      return '<a class="desc-card" href="' + d.fm.archivo + '" download target="_blank" rel="noopener">' +
+               '<span class="desc-ext" data-ext="' + ext + '">' + ext + '</span>' +
+               '<span class="desc-cuerpo">' +
+                 (cat ? '<span class="desc-cat desc-cat--' + cat + '">' + T(cat) + '</span>' : '') +
+                 '<span class="desc-tit">' + tit + '</span>' +
+                 (des ? '<span class="desc-des">' + des + '</span>' : '') +
+                 '<span class="desc-meta">' + meta + '</span>' +
+               '</span>' +
+               '<span class="desc-flecha" aria-hidden="true">' +
+                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+               '</span>' +
+               '<span class="sr-only">' + T('descargar') + '</span>' +
+             '</a>';
+    }).join('');
+
+    /* sólo se enseñan las categorías que de verdad tienen algún documento */
+    const usadas = CATS.filter(c => docs.some(d => (d.fm.categoria || '') === c));
+    filtros.innerHTML = (usadas.length > 1 ? ['todos'].concat(usadas) : []).map(function(c){
+      return '<button type="button" class="desc-filtro' + (c === filtroActivo ? ' activo' : '') + '" data-cat="' + c + '">' + T(c) + '</button>';
+    }).join('');
+  }
+
+  filtros.addEventListener('click', function(e){
+    const b = e.target.closest('.desc-filtro');
+    if(!b) return;
+    filtroActivo = b.getAttribute('data-cat');
+    pinta();
+  });
+
+  seccion.hidden = false;
+  pinta();
+
+  /* Al cambiar de idioma hay que repintar: los títulos y las descripciones
+     tienen versión ES y PT, y las etiquetas de categoría también.
+     ⚠ Se envuelve setLang en vez de escuchar los clics de las banderas: así
+     funciona tanto al pulsar como si el idioma se cambia por código. Y este
+     bloque va DESPUÉS de lang.js a propósito — puesto antes, setLang todavía
+     no existe y el repintado no se llegaba a enganchar (comprobado: la
+     cabecera cambiaba a portugués y los títulos de los documentos no). */
+  if(typeof window.setLang === 'function'){
+    const original = window.setLang;
+    window.setLang = function(){
+      const r = original.apply(this, arguments);
+      setTimeout(pinta, 30);
+      return r;
+    };
+  }
+})();
+</script>
 </body>
 </html>

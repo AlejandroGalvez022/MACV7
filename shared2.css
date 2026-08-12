@@ -531,3 +531,98 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
 #socios a{ display: inline-block; line-height: 0; transition: opacity .25s ease; }
 .socio-col-box > a:hover, .socio-col-box > a:focus-visible,
 #socios a:hover, #socios a:focus-visible{ opacity: .68; }
+/* ══ DESCARGABLES (12-ago-2026) ════════════════════════════════════════════
+   Documentos oficiales que sube el cliente por el CMS. Se reutiliza el
+   lenguaje que la web ya tiene: tarjeta blanca con esquina redondeada y la
+   misma sombra y el mismo levantamiento al pasar por encima que .socio-col-box
+   y .prog-card, para que no parezca un bloque traído de otra web. */
+.desc-intro{
+  max-width: 760px; margin: -18px auto 40px; padding: 0 24px;
+  text-align: center; font-size: 1.05rem; line-height: 1.65; color: #55606e;
+}
+.desc-filtros{
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin: 0 auto 34px; padding: 0 24px;
+}
+.desc-filtro{
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid rgba(0,0,0,.14); background: transparent; color: #55606e;
+  min-height: 44px;                 /* que se pueda pulsar con el dedo */
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.desc-filtro:hover{ border-color: var(--blue-dark); color: var(--blue-dark); }
+.desc-filtro.activo{ background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
+
+.desc-grid{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 18px; max-width: 1180px; margin: 0 auto; padding: 0 24px 10px;
+}
+.desc-card{
+  display: flex; align-items: center; gap: 18px;
+  background: var(--white); border-radius: 16px; padding: 20px 22px;
+  text-decoration: none; color: inherit;
+  box-shadow: 0 8px 28px rgba(0,0,0,.10);
+  transition: transform .3s cubic-bezier(.175,.885,.32,1.275), box-shadow .3s ease;
+}
+.desc-card:hover{ transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+
+/* la pastilla con el tipo de archivo: PDF, DOCX, XLSX… */
+.desc-ext{
+  flex: none; display: grid; place-items: center;
+  width: 54px; height: 62px; border-radius: 8px;
+  background: var(--blue-dark); color: #fff;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: .72rem;
+  letter-spacing: .5px;
+}
+.desc-ext[data-ext="PDF"]{ background: #C0392B; }
+.desc-ext[data-ext="DOC"], .desc-ext[data-ext="DOCX"]{ background: #2B579A; }
+.desc-ext[data-ext="XLS"], .desc-ext[data-ext="XLSX"]{ background: #1D6F42; }
+.desc-ext[data-ext="PPT"], .desc-ext[data-ext="PPTX"]{ background: #C43E1C; }
+.desc-ext[data-ext="ZIP"]{ background: #6B5B95; }
+
+.desc-cuerpo{ display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
+.desc-cat{
+  align-self: flex-start;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 4px;
+  background: rgba(0,0,0,.06); color: #55606e;
+}
+.desc-cat--estrategias{ background: rgba(0,99,234,.12);  color: #0B4FA8; }
+.desc-cat--planes     { background: rgba(0,150,110,.12); color: #0A6B4F; }
+.desc-cat--normativa  { background: rgba(200,60,40,.12); color: #97331F; }
+.desc-cat--memorias   { background: rgba(120,90,180,.12);color: #543C86; }
+.desc-tit{
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem;
+  line-height: 1.32; color: var(--blue-dark);
+}
+.desc-des{ font-size: .88rem; line-height: 1.5; color: #55606e; }
+.desc-meta{
+  font-size: 12px; letter-spacing: .3px; color: #8a94a2; margin-top: 2px;
+}
+.desc-flecha{
+  flex: none; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.05); color: var(--blue-dark);
+  transition: background .25s ease, color .25s ease;
+}
+.desc-flecha svg{ width: 18px; height: 18px; }
+.desc-card:hover .desc-flecha{ background: var(--blue-dark); color: #fff; }
+
+/* texto sólo para lectores de pantalla */
+.sr-only{
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (max-width: 768px){
+  .desc-grid{ grid-template-columns: 1fr; gap: 14px; padding: 0 20px 6px; }
+  .desc-card{ padding: 16px 18px; gap: 14px; }
+  .desc-intro{ font-size: .98rem; padding: 0 20px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .desc-card, .desc-flecha, .desc-filtro{ transition: none !important; }
+  .desc-card:hover{ transform: none !important; }
+}

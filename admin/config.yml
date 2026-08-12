@@ -44,3 +44,42 @@ collections:
       - { label: "Título", name: "titulo", widget: "string", i18n: true, hint: "Máximo 140 caracteres", pattern: ['^.{1,140}$', 'El título no puede superar los 140 caracteres'] }
       - { label: "Extracto", name: "extracto", widget: "text", i18n: true, hint: "Resumen corto que aparece en la tarjeta · máximo 500 caracteres", pattern: ['^[\s\S]{1,500}$', 'El extracto no puede superar los 500 caracteres'] }
       - { label: "Cuerpo completo", name: "body", widget: "markdown", i18n: true, hint: "Texto completo de la noticia. Aquí puedes escribir todo lo largo que necesites." }
+
+  # ── DESCARGABLES (12-ago-2026) ────────────────────────────────────────────
+  # "Documentos oficiales descargables: estrategias, planes, normativa,
+  # memorias." Se suben desde aquí igual que las noticias y salen solos en
+  # Transparencia, sin tener que tocar la web.
+  - name: "descargables"
+    label: "Descargables"
+    label_singular: "Documento"
+    folder: "_descargables"
+    create: true
+    i18n: true
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.titulo}}"
+    identifier_field: titulo
+    summary: "{{titulo}} · {{fecha}}"
+    editor:
+      preview: false
+    fields:
+      # Campos compartidos entre ES y PT (no se traducen)
+      - { label: "Archivo", name: "archivo", widget: "file", i18n: duplicate, hint: "El documento que se descarga (PDF, Word, Excel…)" }
+      - label: "Categoría"
+        name: "categoria"
+        widget: "select"
+        i18n: duplicate
+        default: "estrategias"
+        options:
+          - { label: "Estrategias", value: "estrategias" }
+          - { label: "Planes", value: "planes" }
+          - { label: "Normativa", value: "normativa" }
+          - { label: "Memorias", value: "memorias" }
+      # ⚠ LA FECHA VA EN FORMATO YYYY-MM-DD A PROPÓSITO, y no como en Noticias.
+      # Allí el formato es "DD [de] MMMM [de] YYYY" y el nombre del mes lo
+      # escribe el propio widget, que sale en INGLÉS ("09 de April de 2026").
+      # Con el formato ISO no hay nombre de mes que pueda salir en otro idioma:
+      # la web ya sabe leerlo y lo muestra en español o portugués según toque.
+      - { label: "Fecha", name: "fecha", widget: "datetime", i18n: duplicate, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+
+      # Campos traducibles (uno por idioma)
+      - { label: "Título", name: "titulo", widget: "string", i18n: true, hint: "Nombre del documento tal y como se verá en la web" }
+      - { label: "Descripción", name: "descripcion", widget: "text", i18n: true, required: false, hint: "Una línea explicando de qué es el documento (opcional)" }
