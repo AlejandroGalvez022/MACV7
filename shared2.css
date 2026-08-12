@@ -504,6 +504,15 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
 }
 .feder-ristra a:hover,
 .feder-ristra a:focus-visible{ opacity: .68; }
+/* ⚠ ZONA PULSABLE EN MÓVIL. La ristra es muy apaisada (10,7 : 1), así que a
+   390px de ancho cada logo se queda en 28px de alto. Antes daba igual porque
+   era una imagen y no se pulsaba; ahora son enlaces, y 28px es muy poco para
+   un dedo (lo cómodo son 44).
+   El relleno se compensa con un margen negativo del mismo tamaño: la zona que
+   se puede pulsar crece, y la maquetación NO se mueve ni un píxel. */
+@media (max-width: 900px){
+  #socios .feder-ristra a{ padding: 9px 0; margin: -9px 0; }
+}
 /* ⚠ EL height VA CON !important A PROPÓSITO. La hoja fuerza el alto de los
    logos de socios en dos sitios —`.socio-col-box img{height:80px}` y
    `.socio-col:nth-child(2) .socio-col-box img{height:120px}`— y a la ristra no
