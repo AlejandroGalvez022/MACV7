@@ -521,8 +521,13 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
 .feder-ristra .f-azores { flex: 0 0 40.1020%; }
 .feder-ristra .f-madeira{ flex: 0 0 42.7415%; }
 
-/* los otros dos logos sí eran imágenes sueltas: sólo se envuelven en un <a> */
+/* los otros dos logos sí eran imágenes sueltas: sólo se envuelven en un <a>.
+   ⚠ EL line-height:0 NO ES DECORATIVO. Al meter el <img> dentro de un <a> se
+   crea una caja de línea que le añade el hueco del descender: medido, el logo
+   del Gobierno de Canarias pasaba de 80px a ~90 y empujaba 10px hacia abajo
+   todo lo que venía detrás (la sección crecía 19px). Con esto, envolver en un
+   enlace no cambia NI UN PÍXEL la maquetación. */
 .socio-col-box > a,
-#socios a{ display: inline-block; transition: opacity .25s ease; }
+#socios a{ display: inline-block; line-height: 0; transition: opacity .25s ease; }
 .socio-col-box > a:hover, .socio-col-box > a:focus-visible,
 #socios a:hover, #socios a:focus-visible{ opacity: .68; }
