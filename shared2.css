@@ -479,3 +479,159 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
   width: 100%;
   margin-bottom: 40px;
 }
+
+/* ══ LOGOS FEDER, AHORA ENLAZABLES (12-ago-2026) ═══════════════════════════
+   "ristra_feder.png" era UNA sola imagen con los tres socios dentro (Gesplan,
+   Governo dos Açores y Região Autónoma da Madeira), así que no había forma de
+   dar un enlace distinto a cada uno.
+   Se ha cortado en tres PNG por el CENTRO de los huecos que ya separaban los
+   logos dentro de la propia imagen (medidos: 144px de hueco en x=572 y 131px
+   en x=1909, sobre un original de 3334x310). Cada trozo conserva el alto
+   completo y los anchos suman el total exacto, así que puestos en fila y SIN
+   separación se recomponen EXACTAMENTE igual que la imagen de antes.
+   ⚠ Los porcentajes salen de esos anchos (572, 1337 y 1425 de 3334). Si algún
+   día se cambian los PNG, hay que recalcularlos o la ristra se descuadra. */
+.feder-ristra{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;          /* sin esto, el hueco de línea de los <a> mete 4px */
+  margin: 0 auto;
+}
+.feder-ristra a{
+  display: block;
+  transition: opacity .25s ease;
+}
+.feder-ristra a:hover,
+.feder-ristra a:focus-visible{ opacity: .68; }
+/* ⚠ ZONA PULSABLE EN MÓVIL. La ristra es muy apaisada (10,7 : 1), así que a
+   390px de ancho cada logo se queda en 28px de alto. Antes daba igual porque
+   era una imagen y no se pulsaba; ahora son enlaces, y 28px es muy poco para
+   un dedo (lo cómodo son 44).
+   El relleno se compensa con un margen negativo del mismo tamaño: la zona que
+   se puede pulsar crece, y la maquetación NO se mueve ni un píxel. */
+@media (max-width: 900px){
+  #socios .feder-ristra a{ padding: 9px 0; margin: -9px 0; }
+}
+/* ⚠ EL height VA CON !important A PROPÓSITO. La hoja fuerza el alto de los
+   logos de socios en dos sitios —`.socio-col-box img{height:80px}` y
+   `.socio-col:nth-child(2) .socio-col-box img{height:120px}`— y a la ristra no
+   la afectaban porque el <img> original llevaba su propio `style` en línea, que
+   gana siempre. Al partirla en tres <img> sin estilo en línea, esas reglas se
+   la comieron: medido, los logos pasaban de 49px de alto a 120 y salían
+   ESTIRADOS. Aquí el alto lo manda siempre la proporción de la imagen. */
+.feder-ristra img{
+  width: 100%;
+  height: auto !important;
+  max-width: none;
+  display: block;
+}
+.feder-ristra .f-gesplan{ flex: 0 0 17.1566%; }
+.feder-ristra .f-azores { flex: 0 0 40.1020%; }
+.feder-ristra .f-madeira{ flex: 0 0 42.7415%; }
+
+/* los otros dos logos sí eran imágenes sueltas: sólo se envuelven en un <a>.
+   ⚠ EL line-height:0 NO ES DECORATIVO. Al meter el <img> dentro de un <a> se
+   crea una caja de línea que le añade el hueco del descender: medido, el logo
+   del Gobierno de Canarias pasaba de 80px a ~90 y empujaba 10px hacia abajo
+   todo lo que venía detrás (la sección crecía 19px). Con esto, envolver en un
+   enlace no cambia NI UN PÍXEL la maquetación. */
+.socio-col-box > a,
+#socios a{ display: inline-block; line-height: 0; transition: opacity .25s ease; }
+.socio-col-box > a:hover, .socio-col-box > a:focus-visible,
+#socios a:hover, #socios a:focus-visible{ opacity: .68; }
+/* ══ DESCARGABLES (12-ago-2026) ════════════════════════════════════════════
+   Documentos oficiales que sube el cliente por el CMS. Se reutiliza el
+   lenguaje que la web ya tiene: tarjeta blanca con esquina redondeada y la
+   misma sombra y el mismo levantamiento al pasar por encima que .socio-col-box
+   y .prog-card, para que no parezca un bloque traído de otra web. */
+.desc-intro{
+  max-width: 760px; margin: -18px auto 40px; padding: 0 24px;
+  text-align: center; font-size: 1.05rem; line-height: 1.65; color: #55606e;
+}
+.desc-filtros{
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin: 0 auto 34px; padding: 0 24px;
+}
+.desc-filtro{
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid rgba(0,0,0,.14); background: transparent; color: #55606e;
+  min-height: 44px;                 /* que se pueda pulsar con el dedo */
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.desc-filtro:hover{ border-color: var(--blue-dark); color: var(--blue-dark); }
+.desc-filtro.activo{ background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
+
+.desc-grid{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 18px; max-width: 1180px; margin: 0 auto; padding: 0 24px 10px;
+}
+.desc-card{
+  display: flex; align-items: center; gap: 18px;
+  background: var(--white); border-radius: 16px; padding: 20px 22px;
+  text-decoration: none; color: inherit;
+  box-shadow: 0 8px 28px rgba(0,0,0,.10);
+  transition: transform .3s cubic-bezier(.175,.885,.32,1.275), box-shadow .3s ease;
+}
+.desc-card:hover{ transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+
+/* la pastilla con el tipo de archivo: PDF, DOCX, XLSX… */
+.desc-ext{
+  flex: none; display: grid; place-items: center;
+  width: 54px; height: 62px; border-radius: 8px;
+  background: var(--blue-dark); color: #fff;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: .72rem;
+  letter-spacing: .5px;
+}
+.desc-ext[data-ext="PDF"]{ background: #C0392B; }
+.desc-ext[data-ext="DOC"], .desc-ext[data-ext="DOCX"]{ background: #2B579A; }
+.desc-ext[data-ext="XLS"], .desc-ext[data-ext="XLSX"]{ background: #1D6F42; }
+.desc-ext[data-ext="PPT"], .desc-ext[data-ext="PPTX"]{ background: #C43E1C; }
+.desc-ext[data-ext="ZIP"]{ background: #6B5B95; }
+
+.desc-cuerpo{ display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
+.desc-cat{
+  align-self: flex-start;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 4px;
+  background: rgba(0,0,0,.06); color: #55606e;
+}
+.desc-cat--estrategias{ background: rgba(0,99,234,.12);  color: #0B4FA8; }
+.desc-cat--planes     { background: rgba(0,150,110,.12); color: #0A6B4F; }
+.desc-cat--normativa  { background: rgba(200,60,40,.12); color: #97331F; }
+.desc-cat--memorias   { background: rgba(120,90,180,.12);color: #543C86; }
+.desc-tit{
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem;
+  line-height: 1.32; color: var(--blue-dark);
+}
+.desc-des{ font-size: .88rem; line-height: 1.5; color: #55606e; }
+.desc-meta{
+  font-size: 12px; letter-spacing: .3px; color: #8a94a2; margin-top: 2px;
+}
+.desc-flecha{
+  flex: none; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.05); color: var(--blue-dark);
+  transition: background .25s ease, color .25s ease;
+}
+.desc-flecha svg{ width: 18px; height: 18px; }
+.desc-card:hover .desc-flecha{ background: var(--blue-dark); color: #fff; }
+
+/* texto sólo para lectores de pantalla */
+.sr-only{
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (max-width: 768px){
+  .desc-grid{ grid-template-columns: 1fr; gap: 14px; padding: 0 20px 6px; }
+  .desc-card{ padding: 16px 18px; gap: 14px; }
+  .desc-intro{ font-size: .98rem; padding: 0 20px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .desc-card, .desc-flecha, .desc-filtro{ transition: none !important; }
+  .desc-card:hover{ transform: none !important; }
+}
