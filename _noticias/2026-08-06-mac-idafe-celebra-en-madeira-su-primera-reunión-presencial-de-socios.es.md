@@ -2,7 +2,7 @@
 imagen: /uploads/mac-idafe_banner-noticias.pptx-1-.png
 imagenPos: center center
 categoria: coordinacion
-fecha: 30 de April de 2026
+fecha: 30 de June de 2026
 destacada: false
 titulo: "MAC-IDAFE celebra en Madeira su primera reunión presencial de socios "
 extracto: "El proyecto MAC-IDAFE: Red de Escuelas por la Acción Climática de la
