@@ -2,7 +2,7 @@
 imagen: /uploads/mac-idafe_banner-noticias.pptx-3-.png
 imagenPos: center center
 categoria: proyecto
-fecha: 30 de June de 2026
+fecha: 29 de June de 2026
 destacada: false
 titulo: "Continuamos trabajando con la segunda etapa de MAC-IDAFE: ADAPTAR"
 extracto: "El proyecto de cooperación territorial MAC-IDAFE ha dado un paso
