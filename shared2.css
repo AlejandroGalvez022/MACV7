@@ -479,3 +479,42 @@ nav a[href*="contacto"].active      { background: var(--teal) !important; color:
   width: 100%;
   margin-bottom: 40px;
 }
+
+/* ══ LOGOS FEDER, AHORA ENLAZABLES (12-ago-2026) ═══════════════════════════
+   "ristra_feder.png" era UNA sola imagen con los tres socios dentro (Gesplan,
+   Governo dos Açores y Região Autónoma da Madeira), así que no había forma de
+   dar un enlace distinto a cada uno.
+   Se ha cortado en tres PNG por el CENTRO de los huecos que ya separaban los
+   logos dentro de la propia imagen (medidos: 144px de hueco en x=572 y 131px
+   en x=1909, sobre un original de 3334x310). Cada trozo conserva el alto
+   completo y los anchos suman el total exacto, así que puestos en fila y SIN
+   separación se recomponen EXACTAMENTE igual que la imagen de antes.
+   ⚠ Los porcentajes salen de esos anchos (572, 1337 y 1425 de 3334). Si algún
+   día se cambian los PNG, hay que recalcularlos o la ristra se descuadra. */
+.feder-ristra{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;          /* sin esto, el hueco de línea de los <a> mete 4px */
+  margin: 0 auto;
+}
+.feder-ristra a{
+  display: block;
+  transition: opacity .25s ease;
+}
+.feder-ristra a:hover,
+.feder-ristra a:focus-visible{ opacity: .68; }
+.feder-ristra img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.feder-ristra .f-gesplan{ flex: 0 0 17.1566%; }
+.feder-ristra .f-azores { flex: 0 0 40.1020%; }
+.feder-ristra .f-madeira{ flex: 0 0 42.7415%; }
+
+/* los otros dos logos sí eran imágenes sueltas: sólo se envuelven en un <a> */
+.socio-col-box > a,
+#socios a{ display: inline-block; transition: opacity .25s ease; }
+.socio-col-box > a:hover, .socio-col-box > a:focus-visible,
+#socios a:hover, #socios a:focus-visible{ opacity: .68; }
