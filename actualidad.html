@@ -77,7 +77,7 @@
       <span class="feder-ristra" style="max-width:700px;width:100%;">
             <a class="f-gesplan" href="https://www.gesplan.es/" target="_blank" rel="noopener" aria-label="Gesplan (abre en una pestaña nueva)"><img src="feder-gesplan.png" alt="Gesplan"/></a>
             <a class="f-azores" href="https://portal.azores.gov.pt/web/sraac" target="_blank" rel="noopener" aria-label="Governo dos Açores · Secretaria Regional do Ambiente e Ação Climática (abre en una pestaña nueva)"><img src="feder-azores.png" alt="Governo dos Açores · Secretaria Regional do Ambiente e Ação Climática"/></a>
-            <a class="f-madeira" href="https://cultura.madeira.gov.pt/" target="_blank" rel="noopener" aria-label="Região Autónoma da Madeira · Direção Regional da Cultura (abre en una pestaña nueva)"><img src="feder-madeira.png" alt="Região Autónoma da Madeira · Direção Regional da Cultura"/></a>
+            <a class="f-madeira" href="https://www.madeira.gov.pt/dram" target="_blank" rel="noopener" aria-label="Região Autónoma da Madeira · Direção Regional da Cultura (abre en una pestaña nueva)"><img src="feder-madeira.png" alt="Região Autónoma da Madeira · Direção Regional da Cultura"/></a>
           </span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
@@ -96,7 +96,7 @@
       <div class="socio-col-box" style="min-height:130px;padding:28px 32px;"><span class="feder-ristra" style="width:100%;">
             <a class="f-gesplan" href="https://www.gesplan.es/" target="_blank" rel="noopener" aria-label="Gesplan (abre en una pestaña nueva)"><img src="feder-gesplan.png" alt="Gesplan"/></a>
             <a class="f-azores" href="https://portal.azores.gov.pt/web/sraac" target="_blank" rel="noopener" aria-label="Governo dos Açores · Secretaria Regional do Ambiente e Ação Climática (abre en una pestaña nueva)"><img src="feder-azores.png" alt="Governo dos Açores · Secretaria Regional do Ambiente e Ação Climática"/></a>
-            <a class="f-madeira" href="https://cultura.madeira.gov.pt/" target="_blank" rel="noopener" aria-label="Região Autónoma da Madeira · Direção Regional da Cultura (abre en una pestaña nueva)"><img src="feder-madeira.png" alt="Região Autónoma da Madeira · Direção Regional da Cultura"/></a>
+            <a class="f-madeira" href="https://www.madeira.gov.pt/dram" target="_blank" rel="noopener" aria-label="Região Autónoma da Madeira · Direção Regional da Cultura (abre en una pestaña nueva)"><img src="feder-madeira.png" alt="Região Autónoma da Madeira · Direção Regional da Cultura"/></a>
           </span></div>
     </div>
     <div class="socio-col" style="flex:1;">
@@ -301,9 +301,9 @@ setTimeout(() => {
     return lang === 'pt' ? 'Ler notícia completa' : 'Leer noticia completa';
   }
 
-  // Normaliza la fecha (venga en es/en/pt) y la muestra en el idioma de la noticia
-  function formatFecha(raw, lang) {
-    if (!raw) return '';
+  // Convierte la fecha del frontmatter (venga en es/en/pt) a un Date real, o null si no se reconoce
+  function parseFechaDate(raw) {
+    if (!raw) return null;
     const s = String(raw).trim();
     const M = {
       enero:0, january:0, janeiro:0,
@@ -326,7 +326,14 @@ setTimeout(() => {
       const mes = M[m[2].toLowerCase()];
       if (mes != null) d = new Date(+m[3], mes, +m[1]);
     }
-    if (!d || isNaN(d)) return s; // si no se reconoce, deja el texto original
+    return (d && !isNaN(d)) ? d : null;
+  }
+
+  // Normaliza la fecha (venga en es/en/pt) y la muestra en el idioma de la noticia
+  function formatFecha(raw, lang) {
+    if (!raw) return '';
+    const d = parseFechaDate(raw);
+    if (!d) return String(raw).trim(); // si no se reconoce, deja el texto original
     return d.toLocaleDateString(lang === 'pt' ? 'pt-PT' : 'es-ES', { day:'numeric', month:'long', year:'numeric' });
   }
 
@@ -393,8 +400,18 @@ setTimeout(() => {
       }
     }));
 
-    // El prefijo del nombre es YYYY-MM-DD; orden ascendente + inserción afterbegin = más reciente arriba
-    noticias.sort((a, b) => a.base.localeCompare(b.base));
+    // Orden por la fecha que edita el cliente (campo "fecha" del frontmatter), no por el
+    // nombre del archivo (que el CMS pone con la fecha de creación y no se actualiza si
+    // luego cambian la fecha editorial). Si una noticia no trae fecha reconocible, se usa
+    // el prefijo del nombre (YYYY-MM-DD) como respaldo para que no rompa el orden.
+    // Orden ascendente + inserción afterbegin = más reciente arriba.
+    function fechaOrden(n) {
+      const d = parseFechaDate(n.fm.fecha);
+      if (d) return d.getTime();
+      const m = n.base.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      return m ? new Date(+m[1], +m[2]-1, +m[3]).getTime() : 0;
+    }
+    noticias.sort((a, b) => fechaOrden(a) - fechaOrden(b));
 
     // Guardar datos globalmente para re-render al cambiar idioma
     window._cmsNoticias = noticias;
