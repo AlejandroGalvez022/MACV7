@@ -274,10 +274,12 @@ setTimeout(() => {
     return md
       .replace(/^### (.+)$/gm, '<h3>$1</h3>')
       .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      // Listas: el editor del CMS guarda los puntos con «* » y a mano se escriben con «- ».
+      // Antes que las cursivas, para que el asterisco del punto no se quede a la vista.
+      .replace(/^[*+-] (.+)$/gm, '<li>$1</li>')
+      .replace(/<li>.*<\/li>(?:\r?\n<li>.*<\/li>)*/g, '<ul>$&</ul>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/^- (.+)$/gm, '<li>$1</li>')
-      .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>')
       .split('\n\n').map(p => {
         if (p.startsWith('<h') || p.startsWith('<ul')) return p;
         return `<p>${p.trim()}</p>`;
